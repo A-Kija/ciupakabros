@@ -7,8 +7,9 @@ function App() {
     <div className="App">
       <header className="App-header">
 
-        <Bebras />
-        <Bebras></Bebras>
+        <Bebras color="skyblue" lt="1px" name="Jurga"/>
+        <Bebras color="orange" lt="3px" name="Lina" />
+        <Bebras color="yellow" lt="-5px" name="Sima"></Bebras>
 
       </header>
     </div>

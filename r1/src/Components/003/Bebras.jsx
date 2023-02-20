@@ -1,6 +1,7 @@
 import rand from '../../Functions/rand';
+import BebrasName from './BebrasName';
 
-function Bebras() {
+function Bebras({color, lt, name}) {
 
     const fun = () => {
         let a = '';
@@ -14,15 +15,12 @@ function Bebras() {
         <>
             <h1>
                 <i style={{
-                    color: 'skyblue',
+                    color: color,
+                    letterSpacing: lt,
                     backgroundColor: rand(0, 1) ? 'coral' : 'pink'
                 }}>Bebras</i>
             </h1>
-            <h2 className="red">barsukų yra
-                {
-                    fun()
-                }
-            </h2>
+            <BebrasName name={name} />
         </>
     );
 }
