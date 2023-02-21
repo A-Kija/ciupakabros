@@ -1,4 +1,5 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useState } from 'react';
 import './App.scss';
 
 const animals = [
@@ -11,15 +12,23 @@ const animals = [
 
 function App() {
 
+    const [h2Color, setH2Color] = useState('crimson');
+    const [count, setCount] = useState(1);
 
+    const clickIt = () => {
+        setH2Color(c => c === 'crimson' ? 'yellow' : 'crimson');
+    }
+
+    const add1 = () => {
+        setCount(c => c + 1);
+    }
 
     return (
         <div className="App">
             <header className="App-header">
-
                 <div className="card">
                     <div className="card-header">
-                        <h2>Forest Book</h2>
+                        <h2 style={{color: h2Color}}>Forest Book (page {count})</h2>
                     </div>
                     <ul className="list-group list-group-flush">
                         {
@@ -31,8 +40,8 @@ function App() {
                         }
                     </ul>
                 </div>
-
-
+                <button type="button" className="btn btn-outline-warning mt-4" onClick={clickIt}>CLICK</button>
+                <button type="button" className="btn btn-outline-danger mt-4" onClick={add1}>+ 1</button>
             </header>
         </div>
     );
