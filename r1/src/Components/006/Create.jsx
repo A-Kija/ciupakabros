@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
-function Create() {
+function Create({setCreateData}) {
 
     const [wish, setWish] = useState('');
-    const [size, setSize] = useState(0);
+    const [size, setSize] = useState(5);
 
     const doWish = e => {
         setWish(e.target.value);
@@ -11,6 +11,15 @@ function Create() {
 
     const doWishSize = e => {
         setSize(e.target.value);
+    }
+
+    const create = () => {
+        setCreateData({
+            wish,
+            size
+        });
+        setWish('');
+        setSize(5)
     }
 
     return (
@@ -27,7 +36,7 @@ function Create() {
                     <label className="form-label">How Big <i>{size}</i></label>
                     <input type="range" className="form-control" min="0" max="10" onChange={doWishSize} value={size} />
                 </div>
-                <button type="button" className="btn btn-outline-primary m-4">add</button>
+                <button type="button" className="btn btn-outline-primary m-4" onClick={create}>add</button>
             </div>
         </div>
     )

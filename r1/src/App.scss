@@ -52,7 +52,7 @@
     li {
         position: relative;
         color: skyblue;
-        background-color: darkgreen;
+        // background-color: darkgreen;
         &.big {
             letter-spacing: 12px;
         }
@@ -76,6 +76,25 @@
         font-size: 20px;
         border-radius: 50%;
         background-color: crimson;
+        color: white;
+        cursor: pointer;
+    }
+}
+
+.ed-button {
+    position: absolute;
+    right: 45px;
+    top: 5px;
+    &::after {
+        content: '\2692';
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        font-size: 20px;
+        border-radius: 50%;
+        background-color: darkcyan;
         color: white;
         cursor: pointer;
     }
