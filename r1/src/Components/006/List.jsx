@@ -1,7 +1,11 @@
-function List({ list, setDeleteData }) {
+function List({ list, setDeleteData, setModalData }) {
 
     const destroy = w => {
         setDeleteData(w);
+    }
+
+    const edit = w => {
+        setModalData(w);
     }
 
     if (null === list) {
@@ -24,9 +28,9 @@ function List({ list, setDeleteData }) {
                     {
                         list.length 
                         ?
-                        list.map(w => <li className="list-group-item">
+                        list.map(w => <li key={w.id} className="list-group-item">
                             {w.wish} <i>{w.size}</i>
-                            <div className="ed-button"></div>
+                            <div className="ed-button" onClick={() => edit(w)}></div>
                             <div className="del-button" onClick={() => destroy(w)}></div>
                             </li>)
                         :
