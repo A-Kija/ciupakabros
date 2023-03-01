@@ -1,73 +1,51 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useState } from 'react';
 import './App.scss';
-import Create from './Components/006/Create';
-import Edit from './Components/006/Edit';
-import List from './Components/006/List';
-import { create, destroy, edit, read } from './Functions/localStorage';
+import axios from 'axios';
 
-const KEY = 'whishList';
+
 
 function App() {
 
-    const [list, setList] = useState(null);
-    const [lastRefresh, setLastRefresh] = useState(Date.now());
-    const [createData, setCreateData] = useState(null);
-    const [deleteData, setDeleteData] = useState(null);
-    const [modalData, setModalData] = useState(null);
-    const [editData, setEditData] = useState(null);
-
-    useEffect(() => {
-        // loadingo imitacija
-        // setTimeout(() => setList(read(KEY)), 1000);
-        // be imitacijos
-        setList(read(KEY));
-    }, [lastRefresh]);
+    const [users, setUsers] = useState(null);
 
 
     useEffect(() => {
-        if (null === createData) {
-            return;
-        }
-        create(KEY, createData);
-        setLastRefresh(Date.now())
-    }, [createData]);
+        axios.get('https://jsonplaceholder.typicode.com/users')
+        .then(res => {
+            console.log(res.data);
+            setUsers(res.data.map((u, i) => ({...u, row: i})));
+        });
 
-    useEffect(() => {
-        if (null === deleteData) {
-            return;
-        }
-        // tipo klientas
-        setList(l => l.filter(d => deleteData.id !== d.id));
+    }, []);
 
-        // tipo serverio
-        destroy(KEY, deleteData.id);
-        setLastRefresh(Date.now());
-    }, [deleteData]);
+    const sort = () => {
+        setUsers(u => [...u].sort((a, b) => a.name.localeCompare(b.name)));
+    }
 
-    useEffect(() => {
-        if (null === editData) {
-            return;
-        }
-        edit(KEY, editData, editData.id)
-        setLastRefresh(Date.now());
-    }, [editData]);
+    const sortBack = () => {
+        setUsers(u => [...u].sort((a, b) => a.row - b.row));
+    }
+
+    const sortFancy = () => {
+        setUsers(u => [...u].sort((a, b) => b.name.length - a.name.length ));
+    }
 
 
     return (
-        <>
-        <div className="container">
-            <div className="row">
-                <div className="col-4">
-                    <Create setCreateData={setCreateData} />
-                </div>
-                <div className="col-8">
-                    <List list={list} setDeleteData={setDeleteData} setModalData={setModalData} />
-                </div>
-            </div>
+        <div className="App">
+            <header className="App-header">
+                <h1>Users List</h1>
+                <ul>
+                    {
+                        users ? users.map(u => <li key={u.id}>{u.name} <small style={{fontSize: '50%'}}>{u.company.catchPhrase}</small></li>) : <li>LOADING...</li>
+                    }
+                </ul>
+                <button className="btn btn-outline-primary m-4" onClick={sort}>Sort</button>
+                <button className="btn btn-outline-primary m-4" onClick={sortBack}>Sort Back</button>
+                <button className="btn btn-outline-primary m-4" onClick={sortFancy}>Sort Fancy</button>
+            </header>
         </div>
-        <Edit modalData={modalData} setModalData={setModalData} setEditData={setEditData} />
-        </>
     );
 }
 
