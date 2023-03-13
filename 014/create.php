@@ -1,6 +1,18 @@
 <?php
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    session_start();
+
+    $users = unserialize(file_get_contents(__DIR__ . '/users.ser'));
+
+    // tikrinam
+    foreach($users as $user) {
+        if ($user['place_in_row'] == (int) $_POST['place_in_row']) {
+            $_SESSION['msg'] = ['type' => 'error', 'text' => 'Row is invalid'];
+            header('Location: http://localhost/ciupakabros/014/create.php');
+            die;
+        }
+    }
 
     $id = json_decode(file_get_contents(__DIR__ . '/id.json'));
     $id++;
@@ -13,13 +25,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         'surname' => $_POST['surname'],
     ];
 
-    $users = unserialize(file_get_contents(__DIR__ . '/users.ser'));
+    
 
     $users[] = $user;
 
     $users = serialize($users);
     file_put_contents(__DIR__ . '/users.ser', $users);
 
+    $_SESSION['msg'] = ['type' => 'ok', 'text' => 'New user was created'];
     header('Location: http://localhost/ciupakabros/014/users.php?sort=id_desc');
     die;
 }

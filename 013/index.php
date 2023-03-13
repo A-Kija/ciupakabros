@@ -38,6 +38,7 @@ unset($_SESSION['animal'], $_SESSION['magic_number']);
 <body>
     <h1>013</h1>
     <h2><?= $animal ?> <?= $mn ?></h2>
+    
     <form action="" method="post">
         <input type="text" name="animal">
         <br>
