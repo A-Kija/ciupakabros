@@ -1,10 +1,18 @@
 <?php
 session_start();
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    
-    $users = json_decode(file_get_contents(__DIR__ . '/../db/users.json'), 1);
 
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+
+    // 1 LOGOUT
+    if (isset($_GET['logout'])) {
+        unset($_SESSION['logged'], $_SESSION['name']);
+        header('Location: http://localhost/ciupakabros/015/');
+        die;
+    }
+    
+    // 2 LOGIN
+    $users = json_decode(file_get_contents(__DIR__ . '/../db/users.json'), 1);
     foreach($users as $user) {
         if ($user['name'] == $_POST['name'] && $user['psw'] == md5($_POST['psw'])) {
             $_SESSION['logged'] = 1;
@@ -17,6 +25,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     header('Location: http://localhost/ciupakabros/015/login/');
     die;
 }
+
+// 3 SHOW LOGIN FORM
 
 ?>
 
