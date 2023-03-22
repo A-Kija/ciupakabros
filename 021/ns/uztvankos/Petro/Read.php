@@ -1,7 +1,7 @@
 <?php
 namespace Petro;
 
-use Bebro\Go;
+use Bebro\Valio\Go;
 
 class Read extends Go {
 

@@ -1,0 +1,16 @@
+{
+    "name": "arvyd/ns",
+    "description": "ja ja",
+    "license": "mit",
+    "autoload": {
+        "psr-4": {
+            "": "uztvankos/",
+            "Ievos\\": ""
+        }
+    },
+    "authors": [{
+        "name": "A-Kija",
+        "email": "arvydas.kijakauskas@gmail.com"
+    }],
+    "require": {}
+}

@@ -1,5 +1,5 @@
 <?php
-namespace Bebro;
+namespace Bebro\Valio;
 
 class Go {
 
