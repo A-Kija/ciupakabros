@@ -4,14 +4,12 @@
     "license": "MIT",
     "autoload": {
         "psr-4": {
-            "Arvyd\\Clients\\": "src/"
+            "": ""
         }
     },
-    "authors": [
-        {
-            "name": "A-Kija",
-            "email": "arvydas.kijakauskas@gmail.com"
-        }
-    ],
+    "authors": [{
+        "name": "A-Kija",
+        "email": "arvydas.kijakauskas@gmail.com"
+    }],
     "require": {}
 }
