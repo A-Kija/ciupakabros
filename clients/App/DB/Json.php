@@ -1,7 +1,7 @@
 <?php
 namespace App\DB;
 
-use Ramsey\Uuid\Uuid;
+// use Ramsey\Uuid\Uuid;
 
 class Json implements DataBase {
 
@@ -24,17 +24,28 @@ class Json implements DataBase {
 
     function create(array $clientData) : void
     {
-        $id = $uuid = Uuid::uuid4()->toString();
+        $id = rand(10000000, 99999999);
         $clientData['id'] = $id;
         $this->data[] = $clientData;
     }
 
-    function update(int $clientId, array $clientData) : void{}
+    function update(int $clientId, array $clientData) : void
+    {
+        $clientData['id'] = $clientId;
+        $this->data = array_map(fn($d) => $d['id'] == $clientId ? $clientData : $d, $this->data);
+    }
 
     function delete(int $clientId) : void{}
 
-    function show(int $clientId) : array{}
+    function show(int $clientId) : array
+    {
+        $c = array_filter($this->data, fn($d) => $d['id'] == $clientId);
+        return array_shift($c);
+    }
     
-    function showAll() : array{}
+    function showAll() : array
+    {
+        return $this->data;
+    }
 
 }

@@ -10845,3 +10845,25 @@ body {
 .home h1 .sub.space, .home .h1 .sub.space {
   letter-spacing: 4.1px;
 }
+
+.client-line {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+.client-line .client-info {
+  display: flex;
+  justify-content: space-around;
+}
+.client-line .client-info span {
+  color: crimson;
+  font-weight: bold;
+  letter-spacing: 5px;
+  padding-left: 20px;
+}
+.client-line .buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
