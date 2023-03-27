@@ -10835,6 +10835,7 @@ body {
   color: skyblue;
   font-size: 150px;
   line-height: 1;
+  letter-spacing: 10px;
 }
 .home h1 .sub, .home .h1 .sub {
   color: crimson;
@@ -10842,5 +10843,5 @@ body {
   line-height: 1;
 }
 .home h1 .sub.space, .home .h1 .sub.space {
-  letter-spacing: 4.4px;
+  letter-spacing: 4.1px;
 }

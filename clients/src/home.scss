@@ -8,12 +8,13 @@
         color: skyblue;
         font-size: 150px;
         line-height: 1;
+        letter-spacing: 10px;
         .sub {
             color: crimson;
             font-size: 30px;
             line-height: 1;
             &.space {
-                letter-spacing: 4.4px;
+                letter-spacing: 4.1px;
             }
         }
     }

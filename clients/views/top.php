@@ -8,4 +8,5 @@
     <link rel="stylesheet" href="http://clients.lt/app.css">
     <title><?= $title ?? 'Untitled' ?></title>
 </head>
-<body>   
+<body>
+<?php require __DIR__ . '/nav.php' ?>
