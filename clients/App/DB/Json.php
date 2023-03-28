@@ -35,7 +35,11 @@ class Json implements DataBase {
         $this->data = array_map(fn($d) => $d['id'] == $clientId ? $clientData : $d, $this->data);
     }
 
-    function delete(int $clientId) : void{}
+    function delete(int $clientId) : void
+    {
+        $this->data = array_filter($this->data, fn($d) => $d['id'] != $clientId);
+        $this->data = array_values($this->data);
+    }
 
     function show(int $clientId) : array
     {

@@ -10867,3 +10867,32 @@ body {
   justify-content: flex-end;
   gap: 10px;
 }
+
+.msg-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  margin-top: 30px;
+}
+.msg-container .msg-bin {
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+}
+
+.login {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+form.logout {
+  display: inline-block;
+}
+form.logout button {
+  border: none;
+  outline: none;
+  background-color: transparent;
+}

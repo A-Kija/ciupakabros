@@ -2,9 +2,20 @@
 namespace App\Controllers;
 use App\App;
 use App\DB\Json;
+use App\Services\Auth;
+use App\Services\Messages;
 
 class ClientsController {
 
+    public function __construct()
+    {
+        if (!Auth::get()->isAuth()) {
+            App::redirect('login');
+            die;
+        }
+    }
+    
+    
     public function index()
     {
         $clients = (new Json)->showAll();
@@ -28,7 +39,8 @@ class ClientsController {
         $data['name'] = $_POST['name'];
         $data['surname'] = $_POST['surname'];
         $data['tt'] = isset($_POST['tt']) ? 1 : 0;
-        (new Json)->create($data); 
+        (new Json)->create($data);
+        Messages::msg()->addMessage('New client was created', 'success');
         return App::redirect('clients');
     }
 
@@ -59,6 +71,14 @@ class ClientsController {
         $data['surname'] = $_POST['surname'];
         $data['tt'] = isset($_POST['tt']) ? 1 : 0;
         (new Json)->update($id, $data); 
+        Messages::msg()->addMessage('New client was edited', 'warning');
+        return App::redirect('clients');
+    }
+
+    public function delete($id)
+    {
+        (new Json)->delete($id);
+        Messages::msg()->addMessage('The client gone', 'warning');
         return App::redirect('clients');
     }
 
