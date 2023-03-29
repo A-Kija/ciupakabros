@@ -1,0 +1,41 @@
+.bin {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+li {
+    margin: 5px;
+    background-color: lightblue;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    width: 450px;
+    font-family: monospace;
+}
+
+li .id {
+    color: crimson;
+    font-size: 20px;
+    font-weight: bold;
+    width: 40px;
+}
+
+li .name {
+    color: white;
+    font-size: 18px;
+    width: 200px;
+    letter-spacing: 5px;
+}
+
+li .h {
+    color: white;
+    font-size: 18px;
+    width: 100px;
+}
+
+li .t {
+    color: white;
+    font-size: 18px;
+    width: 100px;
+}
