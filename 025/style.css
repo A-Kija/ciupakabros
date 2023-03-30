@@ -39,3 +39,34 @@ li .t {
     font-size: 18px;
     width: 100px;
 }
+
+form {
+    padding: 30px;
+    border: 1px solid skyblue;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 45px;
+}
+
+form>div {
+    margin: 10px;
+}
+
+label {
+    width: 70px;
+    display: inline-block;
+}
+
+button {
+    cursor: pointer;
+    background-color: skyblue;
+    padding: 5px 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    line-height: 1.8;
+}
