@@ -1,0 +1,98 @@
+.bin {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+li {
+    margin: 5px;
+    background-color: lightblue;
+    padding: 5px 10px;
+    display: flex;
+    align-items: center;
+    width: 530px;
+    font-family: monospace;
+}
+
+li .id {
+    color: crimson;
+    font-size: 20px;
+    font-weight: bold;
+    width: 40px;
+}
+
+li .name {
+    color: white;
+    font-size: 18px;
+    width: 200px;
+    letter-spacing: 5px;
+}
+
+li .h {
+    color: white;
+    font-size: 18px;
+    width: 100px;
+}
+
+li .p {
+    color: white;
+    font-size: 18px;
+    width: 180px;
+    font-style: italic;
+}
+
+li .t {
+    color: white;
+    font-size: 18px;
+    width: 100px;
+}
+
+form {
+    padding: 30px;
+    border: 1px solid skyblue;
+    display: flex;
+    flex-direction: column;
+    margin: 20px 45px;
+}
+
+form>div {
+    margin: 10px;
+}
+
+label {
+    width: 70px;
+    display: inline-block;
+}
+
+button {
+    cursor: pointer;
+    background-color: skyblue;
+    padding: 5px 30px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: white;
+    outline: none;
+    border-radius: 5px;
+    border: none;
+    line-height: 1.8;
+}
+
+nav {
+    padding: 30px;
+    background-color: skyblue;
+    margin: 20px 45px;
+    color: white;
+}
+
+nav a {
+    padding: 0 30px;
+    color: white;
+    text-decoration: none;
+}
+
+h1 {
+    padding: 10px;
+    color: skyblue;
+    margin: 0 45px;
+}
