@@ -49,6 +49,21 @@ else if (isset($_GET['right'])) {
     ";
 
 } 
+
+else if (isset($_GET['group'])) {
+
+    $type = 'INNER GROUP';
+
+    $sql = "
+    SELECT clients.id AS cid, name, phones.id AS pid, client_id, GROUP_CONCAT( number SEPARATOR '<br>' ) AS number 
+    FROM clients
+    INNER JOIN phones
+    ON clients.id = phones.client_id
+    GROUP BY name 
+    ORDER BY name
+    ";
+
+} 
 else {
 
     $type = 'INNER';
@@ -74,6 +89,20 @@ $stmt = $pdo->query($sql);
 $data = $stmt->fetchAll();
 
 
+if (isset($_GET['phpgroup'])) {
+    $d = [];
+    $type = 'PHP GROUP';
+
+    foreach($data as $client) {
+        if (isset($d[$client['name']])) {
+            $d[$client['name']]['number'] .= '<br>'.$client['number'];
+        } else {
+            $d[$client['name']] = $client;
+        }
+    }
+    $data = $d;
+}
+
 
 
 ?>
@@ -94,6 +123,8 @@ $data = $stmt->fetchAll();
         <a href="?inner">INNER</a>
         <a href="?left">LEFT</a>
         <a href="?right">RIGHT</a>
+        <a href="?group">GROUP</a>
+        <a href="?phpgroup">GROUP IN PHP</a>
     </nav>
 
     <h1><?= $type ?></h1>
