@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PirmasController;
+use App\Http\Controllers\CalcController as C;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,9 @@ Route::prefix('labas')->group(function () {
 
 });
 
+
+Route::get('calc', [C::class, 'show'])->name('show');
+Route::post('calc', [C::class, 'doCalc'])->name('do-calc');
 
 
 
