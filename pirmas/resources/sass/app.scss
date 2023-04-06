@@ -1,8 +1,27 @@
 // Fonts
 @import url('https://fonts.bunny.net/css?family=Nunito');
-
 // Variables
 @import 'variables';
-
 // Bootstrap
 @import 'bootstrap/scss/bootstrap';
+.client-line {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    .client-info {
+        display: flex;
+        justify-content: space-around;
+        span {
+            color: crimson;
+            font-weight: bold;
+            letter-spacing: 5px;
+            padding-left: 20px;
+        }
+    }
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+}
