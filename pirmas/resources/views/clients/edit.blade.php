@@ -21,7 +21,8 @@
                             <div class="form-text">Please add client surname here</div>
                         </div>
                         <div class="mb-3 form-check">
-                            <input type="checkbox" class="form-check-input" id="tt" name="tt" {{  old('tt',  $client->tt ? 'checked' : '') }}>
+                            <input type="checkbox" class="form-check-input" id="tt" name="tt" 
+                            @if ((Session::has('tt') && Session::get('tt')) || (!Session::has('tt') && $client->tt)) checked @endif>
                             <label class="form-check-label" for="tt">Has TikTok account</label>
                         </div>
                         <button type="submit" class="btn btn-primary">Submit</button>
