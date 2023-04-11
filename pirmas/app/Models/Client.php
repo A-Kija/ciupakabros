@@ -22,4 +22,11 @@ class Client extends Model
         'tt' => 'Tik Tok users',
         'fb' => 'Facebook users',
     ];
+
+    const PER = [
+        '10' => '10',
+        '17' => '17',
+        '33' => '33',
+        '3' => 'tiny view',
+    ];
 }

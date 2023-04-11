@@ -19,8 +19,29 @@ class ClientController extends Controller
     {
         
         $sort = $request->sort ?? '';
-        
-        $clients = Client::all()->sortBy('name');
+        $filter = $request->filter ?? '';
+        $per = (int) ($request->per ?? 10);
+
+        $clients = match($filter) {
+            'tt' => Client::where('tt', 1),
+            'fb' => Client::where('tt', 0),
+            default => Client::where('tt', 0)->orWhere('tt', 1)
+        };
+
+        $clients = match($sort) {
+            'name_asc' => $clients->orderBy('name'),
+            'name_desc' => $clients->orderBy('name', 'desc'),
+            'surname_asc' => $clients->orderBy('surname'),
+            'surname_desc' => $clients->orderBy('surname', 'desc'),
+            default => $clients
+        };
+
+        $clients = $clients->paginate($per)->withQueryString();
+
+
+        // $clients = Client::all()->sortByDesc('name');
+        // $clients = Client::orderBy('name', 'desc')->get();
+
 
         return view('clients.index', [
             'clients' => $clients,
@@ -28,6 +49,8 @@ class ClientController extends Controller
             'sort' => $sort,
             'filterSelect' => Client::FILTER,
             'filter' => $filter,
+            'perSelect' => Client::PER,
+            'per' => $per,
         ]);
 
     }
