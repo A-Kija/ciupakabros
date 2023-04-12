@@ -15,7 +15,26 @@
                             {{$client->surname}}
                             <span>{{$client->tt ? 'TIK TOK' : 'FB'}}</span>
                         </div>
+                        <div class="buttons">
+                            <a href="{{route('orders-create', ['id' =>$client])}}" class="btn btn-info">new order</a>
+                        </div>
                     </div>
+                    <h2>Orders</h2>
+                    <ul class="list-group">
+                        @forelse($client->order as $order)
+                        <li class="list-group-item">
+                            <div class="order-line">
+                                <div class="order-info">
+                                    {{$order->title}}
+                                    {{$order->price}}
+                                </div>
+                            </div>
+                        </li>
+                        @empty
+                        <li class="list-group-item">
+                            <div class="client-line">No orders</div>
+                        </li>
+                        @endforelse
                 </div>
             </div>
         </div>

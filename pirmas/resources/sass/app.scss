@@ -26,6 +26,37 @@
     }
 }
 
+.order-line {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    .order-info {
+        display: flex;
+        justify-content: space-around;
+        .order-data {
+            width: 300px;
+        }
+        .client {
+            color: skyblue;
+            font-weight: bold;
+            letter-spacing: 5px;
+            padding-right: 20px;
+            width: 300px;
+            text-decoration: none;
+            transition: all .3s;
+            &:hover {
+                color: darken(skyblue, 30%);
+            }
+        }
+    }
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+}
+
 .sort-filter-buttons {
     display: flex;
     justify-content: flex-end;

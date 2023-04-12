@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PirmasController;
 use App\Http\Controllers\CalcController as C;
 use App\Http\Controllers\ClientController as CL;
+use App\Http\Controllers\OrderController as ORD;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,7 +48,15 @@ Route::prefix('clients')->name('clients-')->group(function () {
     Route::delete('/delete/{client}', [CL::class, 'destroy'])->name('delete');
 });
 
-
+Route::prefix('orders')->name('orders-')->group(function () {
+    Route::get('/', [ORD::class, 'index'])->name('index');
+    Route::get('/create', [ORD::class, 'create'])->name('create');
+    Route::post('/create', [ORD::class, 'store'])->name('store');
+    Route::get('/{order}', [ORD::class, 'show'])->name('show');
+    Route::get('/edit/{order}', [ORD::class, 'edit'])->name('edit');
+    Route::put('/edit/{order}', [ORD::class, 'update'])->name('update');
+    Route::delete('/delete/{order}', [ORD::class, 'destroy'])->name('delete');
+});
 
 
 Route::get('/sum/{a}/{b?}', [PirmasController::class, 'sum']);
