@@ -12,7 +12,7 @@
                     <ul class="list-group">
                         @forelse($orders as $order)
                         <li class="list-group-item">
-                            <div class="order-line">
+                            <div class="order-line @if(Session::has('light-up') && Session::get('light-up') ==  $order->id) active @endif">
                                 <div class="order-info">
                                     <div class="order-data">
                                     {{$order->title}}

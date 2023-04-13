@@ -9,6 +9,7 @@ class Client extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
     const SORT = [
         'default' => 'No sort',
         'name_asc' => 'By name A-Z',

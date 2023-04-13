@@ -24,12 +24,24 @@ class DatabaseSeeder extends Seeder
         
         $faker = Faker::create('lt_LT');
 
-        foreach(range(1, 100) as $_) {
+        foreach(range(1, 20) as $_) {
             DB::table('clients')->insert([
                 'name' => $faker->firstName,
                 'surname' => $faker->lastName,
                 'tt' => rand(0, 1),
             ]);
         }
+
+        $p = ['Batai', 'Pica', 'Drugelis', 'Antis', 'Geltoni šortai', 'Stulpas, medinis, 5m',
+        'Guminukai', 'Bananai', 'Laidinė pelė', 'Ausinės', 'Kepurė', 'Padangos'];
+
+        foreach(range(1, 100) as $_) {
+            DB::table('orders')->insert([
+                'title' => $p[rand(0, count($p) - 1)],
+                'price' => rand(10, 1000) / 100,
+                'client_id' => rand(1, 20),
+            ]);
+        }
+
     }
 }

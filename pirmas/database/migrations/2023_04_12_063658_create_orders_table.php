@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('title', 100);
             $table->decimal('price', 8, 2);
             $table->unsignedBigInteger('client_id');
-            $table->foreign('client_id')->references('id')->on('clients');
+            $table->foreign('client_id')->references('id')->on('clients')->onDelete('cascade');
         });
     }
 

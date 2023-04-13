@@ -12,6 +12,11 @@
     .client-info {
         display: flex;
         justify-content: space-around;
+        .orders-count {
+            font-weight: bold;
+            padding: 0 5px;
+            color: orangered;
+        }
         span {
             color: crimson;
             font-weight: bold;
@@ -69,4 +74,19 @@
         top: -6px;
         position: relative;
     }
+}
+
+.order-line.active {
+    background-color: lightcyan;
+    padding: 4px;
+}
+
+.client-line.active {
+    background-color: lightcyan;
+    padding: 4px;
+}
+
+.modal {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.226);
 }

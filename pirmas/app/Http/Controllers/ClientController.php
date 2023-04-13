@@ -21,6 +21,7 @@ class ClientController extends Controller
         $sort = $request->sort ?? '';
         $filter = $request->filter ?? '';
         $per = (int) ($request->per ?? 10);
+        $page = $request->page ?? 1;
 
         $clients = match($filter) {
             'tt' => Client::where('tt', 1),
@@ -35,6 +36,13 @@ class ClientController extends Controller
             'surname_desc' => $clients->orderBy('surname', 'desc'),
             default => $clients
         };
+
+        $request->session()->put('last-client-view', [
+            'sort' => $sort,
+            'filter' => $filter,
+            'page' => $page,
+            'per' => $per
+        ]);
 
         $clients = $clients->paginate($per)->withQueryString();
 
@@ -51,6 +59,7 @@ class ClientController extends Controller
             'filter' => $filter,
             'perSelect' => Client::PER,
             'per' => $per,
+            'page' => $page
         ]);
 
     }
@@ -104,8 +113,10 @@ class ClientController extends Controller
     }
 
 
-    public function edit(Client $client)
+    public function edit(Request $request, Client $client)
     {
+        
+       
         return view('clients.edit', [
             'client' => $client
         ]);
@@ -132,13 +143,25 @@ class ClientController extends Controller
         $client->tt = isset($request->tt) ? 1 : 0;
         $client->save();
         return redirect()
-        ->route('clients-index')
-        ->with('ok', 'The client was updated');
+        ->route('clients-index', $request->session()->get('last-client-view', []))
+        ->with('ok', 'The client was updated')
+        ->with('light-up', $client->id);
     }
 
 
-    public function destroy(Client $client)
+    public function destroy(Request $request, Client $client)
     {
+        
+        if (!$request->confirm && $client->order->count()) {
+            return redirect()
+            ->back()
+            ->with('delete-modal', [
+                'This client has orders. Do you really want to delete?',
+                $client->id
+            ]);
+        }
+        
+        
         $client->delete();
         return redirect()
         ->route('clients-index')
