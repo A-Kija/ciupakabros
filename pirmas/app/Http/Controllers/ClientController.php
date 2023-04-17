@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Client;
+use App\Models\Town;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 // use Illuminate\Validation\Validator as V;
@@ -67,7 +68,11 @@ class ClientController extends Controller
 
     public function create()
     {
-        return view('clients.create');
+        $towns = Town::all();
+        
+        return view('clients.create',[
+            'towns' => $towns
+        ]);
     }
 
 
@@ -97,6 +102,7 @@ class ClientController extends Controller
         $client->name = $request->name;
         $client->surname = $request->surname;
         $client->tt = isset($request->tt) ? 1 : 0;
+        $client->town_id = $request->town_id;
         $client->save();
         return redirect()
         ->route('clients-index')
@@ -115,10 +121,11 @@ class ClientController extends Controller
 
     public function edit(Request $request, Client $client)
     {
-        
+        $towns = Town::all();
        
         return view('clients.edit', [
-            'client' => $client
+            'client' => $client,
+            'towns' => $towns
         ]);
     }
 

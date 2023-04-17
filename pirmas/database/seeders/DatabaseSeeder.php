@@ -24,11 +24,18 @@ class DatabaseSeeder extends Seeder
         
         $faker = Faker::create('lt_LT');
 
+        foreach(range(1, 5) as $_) {
+            DB::table('towns')->insert([
+                'name' => $faker->city,
+            ]);
+        }
+
         foreach(range(1, 20) as $_) {
             DB::table('clients')->insert([
                 'name' => $faker->firstName,
                 'surname' => $faker->lastName,
                 'tt' => rand(0, 1),
+                'town_id' => rand(1, 5),
             ]);
         }
 
