@@ -6,15 +6,20 @@
         <div class="col-8">
             <div class="card mt-5">
                 <div class="card-header">
-                    <h1>Add Towns</h1>
+                    <h1>Add Category</h1>
                 </div>
                 <div class="card-body">
-                    <form action="{{route('towns-store')}}" method="post">
+                    <form action="{{route('cats-store')}}" method="post">
                         <div class="mb-3">
-                            <label class="form-label">Towns Name</label>
-                            <input type="text" class="form-control" name="name" value={{old('name')}}>
-                            <div class="form-text">Please add town name here</div>
+                            <label class="form-label">Category title</label>
+                            <input type="text" class="form-control" name="title" value={{old('title')}}>
+                            <div class="form-text">Please add category title here</div>
                         </div>
+                        <div class="mb-3 cat-color-range">
+                            <label class="form-label">Colors Count: <span class="--colors--counter">{{old('colors_count', 1)}}</span></label>
+                            <input type="range" min="1" max="6" class="form-range --colors--counter" name="colors_count" value={{old('colors_count', 1)}}>
+                        </div>
+
                         <button type="submit" class="btn btn-primary">Submit</button>
                         @csrf
                     </form>

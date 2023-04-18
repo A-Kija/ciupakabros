@@ -1,8 +1,43 @@
-// Fonts
-@import url('https://fonts.bunny.net/css?family=Nunito');
-
-// Variables
 @import 'variables';
-
-// Bootstrap
 @import 'bootstrap/scss/bootstrap';
+.form-label {
+    font-size: 20px;
+}
+
+.cat-line {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    .cat-info {
+        display: flex;
+        justify-content: space-around;
+        .cat-colors-count {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 5px;
+            margin: 5px 0 5px 20px;
+            &>div {
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: gray;
+            }
+        }
+    }
+    .buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+    }
+}
+
+.cat-color-range {
+    display: flex;
+    align-items: center;
+    .form-label {
+        display: inline-block;
+        width: 250px;
+    }
+}
