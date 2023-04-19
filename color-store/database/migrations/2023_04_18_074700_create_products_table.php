@@ -17,6 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('title', 100);
             $table->decimal('price', 6, 2)->unsigned();
+            $table->unsignedBigInteger('cat_id');
+            $table->foreign('cat_id')->references('id')->on('cats');
         });
     }
 

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-8">
+        <div class="col-12">
             <div class="card mt-5">
                 <div class="card-header">
                     <h1>Add Product</h1>
@@ -31,7 +31,7 @@
                                 </div>
                                 <div class="col-4">
                                     <label class="form-label">Product Category</label>
-                                    <select class="form-select --cat--select" data-url="{{route('products-colors')}}">
+                                    <select class="form-select --cat--select" name="cat_id" data-url="{{route('products-colors')}}" data-url-name="{{route('products-color-name')}}">
                                         <option value="0">Cats list</option>
                                         @foreach($cats as $cat)
                                         <option value="{{$cat->id}}">{{$cat->title}} ({{$cat->colors_count}})</option>
@@ -39,6 +39,12 @@
                                     </select>
                                     <div class="form-text">Please select product category here</div>
                                 </div>
+                                <div class="col-12">
+                                    <div class="colors-selectors --colors--selectors">
+
+                                    </div>
+                                </div>
+
                                 <div class="col-12">
                                     <button type="submit" class="mt-5 btn btn-outline-primary">Submit</button>
                                 </div>
