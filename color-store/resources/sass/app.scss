@@ -75,11 +75,10 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px;
-            font-size: 30px;
             span {
                 color: orangered;
                 font-size: 22px;
-                font-weight: bold;
+                padding-left: 20px;
             }
             .buttons {
                 display: flex;
@@ -88,12 +87,14 @@
             }
         }
         .colors {
+            display: flex;
             .color {
                 display: flex;
                 color: white;
                 justify-content: center;
                 align-items: center;
                 font-size: 20px;
+                padding: 0 10px;
                 letter-spacing: 4px;
                 height: 80px;
             }

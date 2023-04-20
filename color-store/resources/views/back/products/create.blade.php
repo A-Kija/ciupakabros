@@ -41,17 +41,13 @@
                                 </div>
                                 <div class="col-12">
                                     <div class="colors-selectors --colors--selectors">
-
                                     </div>
                                 </div>
-
                                 <div class="col-12">
                                     <button type="submit" class="mt-5 btn btn-outline-primary">Submit</button>
                                 </div>
                             </div>
                         </div>
-
-
                         @csrf
                     </form>
                 </div>

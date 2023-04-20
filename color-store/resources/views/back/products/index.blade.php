@@ -16,8 +16,8 @@
                                 <div class="product">
                                     <div class="title-price">
                                         <div>
-                                            {{$product->title}}
-                                            <span>{{$product->price}} EUR</span>
+                                            <h2>{{$product->title}}<span>{{$product->price}} EUR</span></h2>
+                                            
                                         </div>
                                         <div class="buttons">
                                             <a href="{{route('products-edit', $product)}}" class="btn btn-outline-success">Edit</a>

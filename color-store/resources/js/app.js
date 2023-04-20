@@ -24,20 +24,30 @@ if (document.querySelector('.--cat--select')) {
             .then(res => {
                 const bin = document.querySelector('.--colors--selectors');
                 bin.innerHTML = res.data.html;
-                bin.querySelectorAll('[type=color]')
-                    .forEach(i => {
-                        i.addEventListener('change', _ => {
-                            i.closest('.one-color').querySelector('.color-view').style.backgroundColor = i.value;
-                            axios.get(select.dataset.urlName + '?color=' + i.value.substring(1))
-                                .then(res => {
-                                    i.closest('.one-color').querySelector('.color-view').innerText = res.data.name;
-                                    i.closest('.one-color').querySelector('[type=hidden]').value = res.data.name;
-                                });
-                        });
-                    });
-
-                console.log(res.data);
+                addNameEvents(bin, select);
+                // console.log(res.data);
             })
     })
 
+}
+const addNameEvents = (bin, select) => {
+    bin.querySelectorAll('[type=color]')
+        .forEach(i => {
+            i.addEventListener('change', _ => {
+                i.closest('.one-color').querySelector('.color-view').style.backgroundColor = i.value;
+                axios.get(select.dataset.urlName + '?color=' + i.value.substring(1))
+                    .then(res => {
+                        i.closest('.one-color').querySelector('.color-view').innerText = res.data.name;
+                        i.closest('.one-color').querySelector('[type=hidden]').value = res.data.name;
+                    });
+            });
+        });
+}
+
+// puslapio krovimo metu
+if (document.querySelector('.--colors--selectors')) {
+    addNameEvents(
+        document.querySelector('.--colors--selectors'),
+        document.querySelector('.--cat--select')
+    );
 }

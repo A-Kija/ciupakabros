@@ -71,7 +71,7 @@ class ProductController extends Controller
             ]);
         }
 
-        return redirect()->back();
+        return redirect()->route('products-index');
     }
 
 
@@ -83,18 +83,40 @@ class ProductController extends Controller
 
     public function edit(Product $product)
     {
-        //
+        $cats = Cat::all();
+        
+        return view('back.products.edit', [
+            'product' => $product,
+            'cats' => $cats
+        ]);
     }
 
 
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update([
+            'title' => $request->title,
+            'price' => $request->price,
+            'cat_id' =>$request->cat_id
+        ]);
+
+        $product->color()->delete();
+
+        foreach ($request->color as $index => $color) {
+            Color::create([
+                'title' => $request->name[$index],
+                'hex' => $color,
+                'product_id' => $product->id
+            ]);
+        }
+
+        return redirect()->route('products-index');
     }
 
 
     public function destroy(Product $product)
     {
-        //
+        $product->delete();
+        return redirect()->route('products-index');
     }
 }
