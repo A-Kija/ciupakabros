@@ -19,6 +19,7 @@
                                             <h2>{{$product->title}}<span>{{$product->price}} EUR</span></h2>
                                             
                                         </div>
+                                        @if(Auth::user()->role < 5)
                                         <div class="buttons">
                                             <a href="{{route('products-edit', $product)}}" class="btn btn-outline-success">Edit</a>
                                             <form action="{{route('products-delete', $product)}}" method="post">
@@ -27,6 +28,7 @@
                                                 @method('delete')
                                             </form>
                                         </div>
+                                        @endif
                                     </div>
                                     <div class="colors">
                                         @foreach($product->color as $color)

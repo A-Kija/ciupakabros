@@ -29,15 +29,15 @@ Route::prefix('cats')->name('cats-')->group(function () {
 });
 
 Route::prefix('products')->name('products-')->group(function () {
-    Route::get('/', [P::class, 'index'])->name('index');
-    Route::get('/colors', [P::class, 'colors'])->name('colors');
-    Route::get('/color-name', [P::class, 'colorName'])->name('color-name');
-    Route::get('/create', [P::class, 'create'])->name('create');
-    Route::post('/create', [P::class, 'store'])->name('store');
-    Route::get('/{product}', [P::class, 'show'])->name('show');
-    Route::get('/edit/{product}', [P::class, 'edit'])->name('edit');
-    Route::put('/edit/{product}', [P::class, 'update'])->name('update');
-    Route::delete('/delete/{product}', [P::class, 'destroy'])->name('delete');
+    Route::get('/', [P::class, 'index'])->name('index')->middleware('role:admin|client');
+    Route::get('/colors', [P::class, 'colors'])->name('colors')->middleware('role:admin');
+    Route::get('/color-name', [P::class, 'colorName'])->name('color-name')->middleware('role:admin');
+    Route::get('/create', [P::class, 'create'])->name('create')->middleware('role:admin');
+    Route::post('/create', [P::class, 'store'])->name('store')->middleware('role:admin');
+    Route::get('/{product}', [P::class, 'show'])->name('show')->middleware('role:admin');
+    Route::get('/edit/{product}', [P::class, 'edit'])->name('edit')->middleware('role:admin');
+    Route::put('/edit/{product}', [P::class, 'update'])->name('update')->middleware('role:admin');
+    Route::delete('/delete/{product}', [P::class, 'destroy'])->name('delete')->middleware('role:admin');
 });
 
 
