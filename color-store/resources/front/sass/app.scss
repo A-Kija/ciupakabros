@@ -1,0 +1,40 @@
+@import 'variables';
+@import 'bootstrap/scss/bootstrap';
+.product-line {
+    display: flex;
+    flex-direction: column;
+    border: 3px dotted skyblue;
+    padding: 10px;
+    margin: 20px 0;
+    .product-colors {
+        display: flex;
+        justify-content: flex-start;
+        .color {
+            height: 100px;
+            width: 200px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            letter-spacing: 3px;
+        }
+    }
+    .product-info {
+        display: flex;
+        justify-content: space-between;
+        h2 {
+            color: pink;
+            font-family: $m;
+            padding-top: 40px;
+        }
+        .buy {
+            display: flex;
+            flex-direction: column;
+            color: skyblue;
+            font-family: $z;
+            font-size: 30px;
+            padding: 10px 20px;
+        }
+    }
+}
