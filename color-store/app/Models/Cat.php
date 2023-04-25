@@ -11,4 +11,9 @@ class Cat extends Model
 
     protected $fillable = ['title', 'colors_count'];
     public $timestamps = false;
+
+    public function product()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

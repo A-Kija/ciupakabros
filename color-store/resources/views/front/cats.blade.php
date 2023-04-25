@@ -5,13 +5,18 @@
     </div>
     <div class="card-body">
         <ul class="list-group">
-        @forelse($cats->get() as $cat)
-            <div class="cat-line">{{$cat->title}}</div>
-        @empty
+            <div class="cat-line">
+                <a href="{{route('front-index')}}">All products</a>
+            </div>
+            @forelse($cats->get() as $cat)
+            <div class="cat-line">
+                <a href="{{route('front-cat-colors', $cat)}}">{{$cat->title}}</a>
+            </div>
+            @empty
             <li class="list-group-item">
                 <div class="cat-line">No categories</div>
-            </li>   
-        @endforelse
+            </li>
+            @endforelse
         </ul>
     </div>
 </div>

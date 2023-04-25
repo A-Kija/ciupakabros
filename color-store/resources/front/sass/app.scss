@@ -23,10 +23,14 @@
     .product-info {
         display: flex;
         justify-content: space-between;
+        a {
+            text-decoration: none;
+        }
         h2 {
             color: pink;
             font-family: $m;
-            padding-top: 40px;
+            padding-top: 50px;
+            font-weight: bold;
         }
         .buy {
             display: flex;
@@ -35,6 +39,77 @@
             font-family: $z;
             font-size: 30px;
             padding: 10px 20px;
+        }
+    }
+}
+
+.one-product {
+    display: flex;
+    flex-direction: column;
+    .one-product-colors {
+        display: flex;
+        .color {
+            width: 200px;
+            height: 500px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            letter-spacing: 3px;
+        }
+    }
+    .buy {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        color: skyblue;
+        font-family: $z;
+        font-size: 30px;
+        padding: 10px 20px;
+    }
+}
+
+.buy {
+    section {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+        [type=number] {
+            font-size: 0.8em;
+            height: 40px;
+            width: 50px;
+            border-radius: 5px;
+            outline: none;
+        }
+    }
+}
+
+.nav-item {
+    .top-cart {
+        display: flex;
+        align-items: center;
+        svg {
+            height: 40px;
+            width: 40px;
+            fill: crimson;
+        }
+        .cart-info {
+            display: flex;
+            height: 100%;
+            align-items: center;
+            gap: 5px;
+            .count {
+                width: 30px;
+                height: 30px;
+                border: 2px solid crimson;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                border-radius: 50%;
+            }
+            .total {
+                letter-spacing: 1px;
+            }
         }
     }
 }
