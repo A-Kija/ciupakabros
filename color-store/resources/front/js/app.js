@@ -19,3 +19,15 @@ document.querySelectorAll('.--add--to--cart').forEach(section => {
             });
     });
 });
+
+if (document.querySelector('.--top--cart')) {
+    window.addEventListener('load', _ => {
+        const url = document.querySelector('.--top--cart').dataset.url;
+        axios.get(url)
+            .then(res => {
+                document.querySelector('.--count').innerText = res.data.count;
+                document.querySelector('.--total').innerText = res.data.total.toFixed(2);
+                document.querySelector('.--cart-info').style.opacity = 1;
+            })
+    })
+}

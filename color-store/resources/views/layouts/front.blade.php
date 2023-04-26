@@ -71,7 +71,8 @@
 
 
                         <li class="nav-item">
-                            <div class="top-cart">
+                            <div class="top-cart --top--cart" data-url="{{route('cart-mini-cart')}}">
+                            <a href="{{route('cart-show')}}">
                                 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512">
                                     <g>
                                         <g>
@@ -90,9 +91,10 @@
                                         </g>
                                     </g>
                                 </svg>
-                                <div class="cart-info">
-                                    <div class="count --count">7</div>
-                                    <div class="total"><span class="--total">571.33</span> eur</div>
+                                </a>
+                                <div class="cart-info --cart-info" style="opacity: 0;">
+                                    <div class="count --count"></div>
+                                    <div class="total"><span class="--total"></span> eur</div>
                                 </div>
                             </div>
                         </li>

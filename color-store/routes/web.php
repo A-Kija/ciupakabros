@@ -26,7 +26,11 @@ Route::name('front-')->group(function () {
 });
 
 Route::prefix('cart')->name('cart-')->group(function () {
-    Route::put('/', [CART::class, 'add'])->name('add');
+    Route::put('/add', [CART::class, 'add'])->name('add');
+    Route::put('/rem', [CART::class, 'rem'])->name('rem');
+    Route::get('/', [CART::class, 'showCart'])->name('show');
+    Route::get('/mini-cart', [CART::class, 'miniCart'])->name('mini-cart');
+    
 });
 
 Route::prefix('cats')->name('cats-')->group(function () {

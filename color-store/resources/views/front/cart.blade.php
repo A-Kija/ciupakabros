@@ -9,7 +9,7 @@
         <div class="col-9">
             <div class="card mt-5">
                 <div class="card-header">
-                    <h2>{{$cat->title}} products</h2>
+                    <h2>Cart</h2>
                 </div>
                 <div class="card-body">
                     <ul class="list-group">
@@ -24,19 +24,27 @@
                                 <a href="{{route('front-show-product', $product)}}">
                                     <h2>{{$product->title}}</h2>
                                 </a>
-                                <div class="buy">
+                                <div class="buy cart">
                                     <span>{{$product->price}} eur</span>
-                                    <section class="--add--to--cart" data-url="{{route('cart-add')}}">
-                                        <button type="button" class="btn btn-primary">add to cart</button>
+                                    <form action="{{route('cart-rem')}}" method="post">
                                         <input type="hidden" name="id" value={{$product->id}}>
-                                        <input type="number" value="1" min="1" name="count">
-                                    </section>
+                                        <button type="submit" class="btn btn-danger">remove</button>
+                                        @method('put')
+                                        @csrf
+                                    </form>
+                                    <form action="{{route('cart-rem')}}" method="post">
+                                        <input type="hidden" name="id" value={{$product->id}}>
+                                        <button type="submit" name="update" class="btn btn-info">update</button>
+                                        <input type="number" value="{{$product->count}}" min="1" name="count">
+                                        @method('put')
+                                        @csrf
+                                    </form>
                                 </div>
                             </div>
                         </div>
                         @empty
                         <li class="list-group-item">
-                            No products
+                            Cart is empty
                         </li>
                         @endforelse
                     </ul>
