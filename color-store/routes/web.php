@@ -28,6 +28,8 @@ Route::name('front-')->group(function () {
 Route::prefix('cart')->name('cart-')->group(function () {
     Route::put('/add', [CART::class, 'add'])->name('add');
     Route::put('/rem', [CART::class, 'rem'])->name('rem');
+    Route::put('/update', [CART::class, 'update'])->name('update');
+    Route::post('/buy', [CART::class, 'buy'])->name('buy');
     Route::get('/', [CART::class, 'showCart'])->name('show');
     Route::get('/mini-cart', [CART::class, 'miniCart'])->name('mini-cart');
     

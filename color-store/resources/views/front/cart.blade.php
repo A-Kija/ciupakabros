@@ -32,7 +32,7 @@
                                         @method('put')
                                         @csrf
                                     </form>
-                                    <form action="{{route('cart-rem')}}" method="post">
+                                    <form action="{{route('cart-update')}}" method="post">
                                         <input type="hidden" name="id" value={{$product->id}}>
                                         <button type="submit" name="update" class="btn btn-info">update</button>
                                         <input type="number" value="{{$product->count}}" min="1" name="count">
@@ -48,6 +48,22 @@
                         </li>
                         @endforelse
                     </ul>
+                    <div class="cart-bottom">
+                        <div class="total">
+                            Total: {{$total}} eur
+                        </div>
+                       
+                        <div class="buy-now">
+                            @guest
+                            <h3>Please login to buy</h3>
+                            @else
+                            <form action="{{route('cart-buy')}}" method="post">
+                                <button type="submit" class="btn btn-success">Buy Now</button>
+                                @csrf
+                            </form>
+                            @endguest
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

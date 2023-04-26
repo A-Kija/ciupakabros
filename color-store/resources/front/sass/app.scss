@@ -132,3 +132,21 @@
         }
     }
 }
+
+.cart-bottom {
+    margin-top: 20px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    border-top: 2px solid black;
+    .total {
+        display: flex;
+        justify-content: flex-end;
+        padding: 20px;
+        font-size: 30px;
+    }
+    .buy-now {
+        display: flex;
+        justify-content: flex-end;
+    }
+}
