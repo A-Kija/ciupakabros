@@ -25,6 +25,7 @@ Route::name('front-')->group(function () {
     Route::get('/category/{cat}', [F::class, 'catColors'])->name('cat-colors');
     Route::get('/product/{product}', [F::class, 'showProduct'])->name('show-product');
     Route::get('/my-orders', [F::class, 'orders'])->name('orders');
+    Route::get('/download/{order}', [F::class, 'download'])->name('download');
 });
 
 Route::prefix('cart')->name('cart-')->group(function () {
@@ -60,6 +61,7 @@ Route::prefix('products')->name('products-')->group(function () {
 
 Route::prefix('orders')->name('orders-')->group(function () {
     Route::get('/', [O::class, 'index'])->name('index')->middleware('role:admin');
+    Route::put('/status/{order}', [O::class, 'update'])->name('update')->middleware('role:admin');
     // Route::get('/create', [C::class, 'create'])->name('create')->middleware('role:admin');
     // Route::post('/create', [C::class, 'store'])->name('store')->middleware('role:admin');
     // Route::get('/edit/{cat}', [C::class, 'edit'])->name('edit')->middleware('role:admin');

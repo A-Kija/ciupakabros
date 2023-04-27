@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cat;
 use App\Models\Order;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class FrontController extends Controller
 {
@@ -44,4 +45,26 @@ class FrontController extends Controller
             'status' => Order::STATUS
         ]);
     }
+
+    public function download(Order $order)
+    {
+
+
+        $productNames = array_map(fn($p) => $p['title'], $order->products);
+
+        $products = Product::whereIn('title', $productNames)->get();
+
+        // return view('front.pdf',[
+        //         'order' => $order,
+        //         'products' => $products,
+        // ]);
+
+        $pdf = Pdf::loadView('front.pdf',[
+            'order' => $order,
+            'products' => $products,
+        ]);
+
+        return $pdf->download('order-'.$order->id.'.pdf');
+    }
+
 }

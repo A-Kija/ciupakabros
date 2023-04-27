@@ -15,7 +15,16 @@
                             <div class="front-orders">
                                 <div class="front-order">
                                     <div class="front-order-number">#{{$order->id}}</div>
+                                    <div class="front-order-user">{{$order->user->name}}</div>
+                                    <form action="{{route('orders-update', $order)}}" method="post">
+                                        <button type="submit" name=status value="1" class="btn btn-warning">Proccesing</button>
+                                        <button type="submit" name=status value="2" class="btn btn-warning">Confirmed</button>
+                                        @csrf
+                                        @method('put')
+                                    </form>
+
                                     <div class="front-order-status">{{$status[$order->status]}}</div>
+
                                 </div>
                                 <div class="front-order-products">
                                     <ul class="list-group">

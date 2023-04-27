@@ -19,6 +19,9 @@
                                 <div class="front-order">
                                     <div class="front-order-number">#{{$order->id}}</div>
                                     <div class="front-order-status">{{$status[$order->status]}}</div>
+                                    @if($order->status == 2)
+                                        <a href="{{route('front-download', $order)}}">Download</a>
+                                    @endif
                                 </div>
                                 <div class="front-order-products">
                                     <ul class="list-group">

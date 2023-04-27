@@ -113,6 +113,14 @@
             color: crimson;
             font-weight: bold;
         }
+        .front-order-user {
+            font-size: 22px;
+            color: orange;
+        }
+        .front-order-status {
+            padding: 10px 0;
+            letter-spacing: 3px;
+        }
     }
     .front-order-products {
         display: flex;
