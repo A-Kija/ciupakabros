@@ -46,4 +46,9 @@ class User extends Authenticatable
         1 => 'admin',
         10 => 'client'
     ];
+
+    public function order()
+    {
+        return $this->hasMany(Order::class);
+    }
 }

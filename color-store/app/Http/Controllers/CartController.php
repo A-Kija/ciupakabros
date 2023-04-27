@@ -98,7 +98,7 @@ class CartController extends Controller
      
         });
 
-        $products = json_encode($products);
+        // $products = json_encode($products);
         $userId = $request->user()->id;
 
         Order::create([

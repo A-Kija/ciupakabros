@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Cat;
+use App\Models\Order;
 
 class FrontController extends Controller
 {
@@ -31,6 +32,16 @@ class FrontController extends Controller
     {
         return view('front.product', [
             'product' => $product,
+        ]);
+    }
+
+    public function orders(Request $request)
+    {
+        $orders = $request->user()->order;
+
+        return view('front.orders', [
+            'orders' => $orders,
+            'status' => Order::STATUS
         ]);
     }
 }

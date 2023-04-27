@@ -10,4 +10,11 @@ class Order extends Model
     use HasFactory;
     protected $fillable = ['products', 'user_id', 'status', 'price'];
     public $timestamps = false;
+    protected $casts = [
+        'products' => 'array',
+    ];
+    const STATUS = [
+        1 => 'Proccesing',
+        2 => 'Confirmed'
+    ];
 }

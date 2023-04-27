@@ -101,3 +101,37 @@
         }
     }
 }
+
+.front-orders {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    .front-order {
+        width: 50%;
+        .front-order-number {
+            font-size: 26px;
+            color: crimson;
+            font-weight: bold;
+        }
+    }
+    .front-order-products {
+        display: flex;
+        justify-content: flex-end;
+        width: 50%;
+        .front-order-products-list {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            span {
+                font-size: 20px;
+                color: skyblue;
+                padding: 0 10px;
+            }
+            i {
+                padding: 0 10px;
+                font-style: normal;
+            }
+        }
+    }
+}

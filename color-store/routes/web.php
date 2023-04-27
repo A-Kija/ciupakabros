@@ -5,6 +5,7 @@ use App\Http\Controllers\CatController as C;
 use App\Http\Controllers\ProductController as P;
 use App\Http\Controllers\FrontController as F;
 use App\Http\Controllers\CartController as CART;
+use App\Http\Controllers\OrderController as O;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,7 @@ Route::name('front-')->group(function () {
     Route::get('/', [F::class, 'index'])->name('index');
     Route::get('/category/{cat}', [F::class, 'catColors'])->name('cat-colors');
     Route::get('/product/{product}', [F::class, 'showProduct'])->name('show-product');
+    Route::get('/my-orders', [F::class, 'orders'])->name('orders');
 });
 
 Route::prefix('cart')->name('cart-')->group(function () {
@@ -54,6 +56,15 @@ Route::prefix('products')->name('products-')->group(function () {
     Route::get('/edit/{product}', [P::class, 'edit'])->name('edit')->middleware('role:admin');
     Route::put('/edit/{product}', [P::class, 'update'])->name('update')->middleware('role:admin');
     Route::delete('/delete/{product}', [P::class, 'destroy'])->name('delete')->middleware('role:admin');
+});
+
+Route::prefix('orders')->name('orders-')->group(function () {
+    Route::get('/', [O::class, 'index'])->name('index')->middleware('role:admin');
+    // Route::get('/create', [C::class, 'create'])->name('create')->middleware('role:admin');
+    // Route::post('/create', [C::class, 'store'])->name('store')->middleware('role:admin');
+    // Route::get('/edit/{cat}', [C::class, 'edit'])->name('edit')->middleware('role:admin');
+    // Route::put('/edit/{cat}', [C::class, 'update'])->name('update')->middleware('role:admin');
+    // Route::delete('/delete/{cat}', [C::class, 'destroy'])->name('delete')->middleware('role:admin');
 });
 
 

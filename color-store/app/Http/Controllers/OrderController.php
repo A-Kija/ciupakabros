@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
-use App\Http\Requests\StoreOrderRequest;
-use App\Http\Requests\UpdateOrderRequest;
+use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        $orders = Order::all();
+
+        return view('back.orders.index', [
+            'orders' => $orders,
+            'status' => Order::STATUS
+        ]);
     }
 
     /**
