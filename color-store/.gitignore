@@ -1,6 +1,7 @@
 /node_modules
 /public/build
 /public/hot
+/public/cats-photo
 /public/storage
 /storage/*.key
 /vendor

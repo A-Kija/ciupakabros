@@ -13,6 +13,7 @@
         }
         table {
             width: 100%;
+            border-collapse: collapse;
         }
         td {
             height: 200px;

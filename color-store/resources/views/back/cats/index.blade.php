@@ -14,11 +14,18 @@
                         <li class="list-group-item">
                             <div class="cat-line">
                                 <div class="cat-info">
+                                    <div class="photo">
+                                        @if($cat->photo)
+                                        <img src="{{asset('cats-photo') .'/'. $cat->photo}}">
+                                        @else
+                                        <img src="{{asset('cats-photo') .'/no.png'}}">
+                                        @endif
+                                    </div>
                                     <h2>{{$cat->title}}</h2>
                                     <div class="cat-colors-count">
                                         @for($i = 0; $i < $cat->colors_count; $i++)
                                             <div class="--random--color"></div>
-                                        @endfor
+                                            @endfor
                                     </div>
                                 </div>
                                 <div class="buttons">

@@ -12,6 +12,13 @@
     .cat-info {
         display: flex;
         justify-content: space-around;
+        .photo {
+            margin: 0 10px;
+            img {
+                height: 100px;
+                width: auto;
+            }
+        }
         .cat-colors-count {
             display: flex;
             justify-content: flex-start;

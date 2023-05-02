@@ -9,7 +9,7 @@ class Cat extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title', 'colors_count'];
+    protected $fillable = ['title', 'colors_count', 'photo'];
     public $timestamps = false;
 
     public function product()
