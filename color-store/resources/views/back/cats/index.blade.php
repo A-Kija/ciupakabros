@@ -16,7 +16,7 @@
                                 <div class="cat-info">
                                     <div class="photo">
                                         @if($cat->photo)
-                                        <img src="{{asset('cats-photo') .'/'. $cat->photo}}">
+                                        <img src="{{asset('cats-photo') .'/t_'. $cat->photo}}">
                                         @else
                                         <img src="{{asset('cats-photo') .'/no.png'}}">
                                         @endif

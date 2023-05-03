@@ -20,9 +20,21 @@
                             <input type="range" min="1" max="6" class="form-range --colors--counter" name="colors_count" value={{old('colors_count', 1)}}>
                         </div>
                         <div class="mb-3">
-                            <label class="form-label">Cat photo</label>
+                            <label class="form-label">Main Cat photo</label>
                             <input type="file" class="form-control" name="photo">
                         </div>
+
+
+                        <div class="mb-3" data-gallery="0">
+                            <label class="form-label">Gallery photo <span class="rem">X</span></label>
+                            <input type="file" class="form-control">
+                        </div>
+
+                        <div class="gallery-inputs">
+                        
+                        </div>
+
+                        <button type="button" class="btn btn-secondary --add--gallery">add gallery photo</button>
 
                         <button type="submit" class="btn btn-primary">Submit</button>
                         @csrf

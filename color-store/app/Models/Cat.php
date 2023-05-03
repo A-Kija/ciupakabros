@@ -16,4 +16,9 @@ class Cat extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function gallery()
+    {
+        return $this->hasMany(Photo::class, 'cat_id', 'id');
+    }
 }

@@ -150,3 +150,22 @@
         }
     }
 }
+
+[data-gallery="0"] {
+    display: none;
+}
+
+span.rem {
+    font-weight: bold;
+    color: white;
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid crimson;
+    background-color: crimson;
+    border-radius: 50%;
+    padding: 5px;
+    width: 30px;
+    height: 30px;
+}
