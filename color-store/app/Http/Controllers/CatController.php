@@ -46,28 +46,10 @@ class CatController extends Controller
                 ->back()
                 ->withErrors($validator);
         }
-
-
         
         $photo = $request->photo;
         if ($photo) {
-            // Image::configure(['driver' => 'imagick']);
-
-
-
-
-            $name = $photo->getClientOriginalName();
-            $name = rand(1000000, 9999999) . '-' . $name;
-            $path = public_path() . '/cats-photo/';
-            $photo->move($path, $name);
-
-            $img = Image::make($path . $name);
-            $img->resize(200, 200);
-            $img->save($path . 't_' . $name, 90);
-
-
-
-
+            $name = $cat->savePhoto($photo);
         }
         $id = Cat::create([
             'title' => $request->title,
@@ -76,16 +58,8 @@ class CatController extends Controller
         ])->id;
 
         foreach ($request->gallery ?? [] as $gallery) {
-            $name = $gallery->getClientOriginalName();
-            $name = rand(1000000, 9999999) . '-' . $name;
-            $path = public_path() . '/cats-photo/';
-            $gallery->move($path, $name);
-            Photo::create([
-                'cat_id' => $id,
-                'photo' => $name
-            ]);
+            Photo::add($gallery, $id);
         }
-
 
         return redirect()->route('cats-index');
     }
@@ -101,10 +75,33 @@ class CatController extends Controller
 
     public function update(Request $request, Cat $cat)
     {
-        $cat->update([
-            'title' => $request->title,
-            'colors_count' => $request->colors_count,
-        ]);
+        
+        if ($request->delete == 1) {
+            $cat->deletePhoto();
+            return redirect()->back();
+        }
+
+        $photo = $request->photo;
+
+        if ($photo) {
+            $name = $cat->savePhoto($photo);
+            $cat->deletePhoto();
+            $cat->update([
+                'title' => $request->title,
+                'colors_count' => $request->colors_count,
+                'photo' => $name
+            ]);
+        } else {
+            $cat->update([
+                'title' => $request->title,
+                'colors_count' => $request->colors_count,
+            ]);
+        }
+
+        foreach ($request->gallery ?? [] as $gallery) {
+            Photo::add($gallery, $cat->id);
+        }
+
         return redirect()->route('cats-index');
     }
 
@@ -114,18 +111,23 @@ class CatController extends Controller
         
         if ($cat->gallery->count()) {
             foreach ($cat->gallery as $gal) {
-                $photo = public_path() . '/cats-photo/' . $gal->photo;
-                unlink($photo);
-                $gal->delete();
+                $gal->deletePhoto();
             }
         }
         
         if ($cat->photo) {
-            $photo = public_path() . '/cats-photo/' . $cat->photo;
-            unlink($photo);
+            $cat->deletePhoto();
         }
         
         $cat->delete();
         return redirect()->route('cats-index');
     }
+
+
+    public function destroyPhoto(Photo $photo)
+    {
+        $photo->deletePhoto();
+        return redirect()->back();
+    }
+
 }

@@ -44,6 +44,7 @@ Route::prefix('cats')->name('cats-')->group(function () {
     Route::get('/edit/{cat}', [C::class, 'edit'])->name('edit')->middleware('role:admin');
     Route::put('/edit/{cat}', [C::class, 'update'])->name('update')->middleware('role:admin');
     Route::delete('/delete/{cat}', [C::class, 'destroy'])->name('delete')->middleware('role:admin');
+    Route::delete('/delete-photo/{photo}', [C::class, 'destroyPhoto'])->name('delete-photo')->middleware('role:admin');
 });
 
 Route::prefix('products')->name('products-')->group(function () {
