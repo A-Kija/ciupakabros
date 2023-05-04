@@ -184,3 +184,24 @@
         }
     }
 }
+
+.stars {
+    padding: 40px 0 0 0;
+    [type=checkbox]+.star {
+        font-size: 30px;
+        color: crimson;
+        cursor: pointer;
+        user-select: none;
+        &:after {
+            content: '\2606'
+        }
+    }
+    [type=checkbox]:checked+.star {
+        &:after {
+            content: '\2605'
+        }
+    }
+    [type=checkbox] {
+        display: none;
+    }
+}

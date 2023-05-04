@@ -24,6 +24,7 @@
                                 <a href="{{route('front-show-product', $product)}}">
                                     <h2>{{$product->title}}</h2>
                                 </a>
+                                @include('front.stars')
                                 <div class="buy">
                                     <span>{{$product->price}} eur</span>
                                     <section class="--add--to--cart" data-url="{{route('cart-add')}}">

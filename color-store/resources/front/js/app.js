@@ -31,3 +31,25 @@ if (document.querySelector('.--top--cart')) {
             })
     })
 }
+
+document.querySelectorAll('.stars input')
+    .forEach(i => {
+        i.addEventListener('change', _ => {
+            const star = i.dataset.star;
+            const isChecking = i.checked;
+
+            // i.closest('.stars').querySelectorAll('input')
+            //     .forEach(s => s.checked = false);
+
+            if (isChecking) {
+                i.closest('.stars').querySelectorAll('input')
+                    .forEach(s => s.dataset.star <= star ? s.checked = true : s.checked = false);
+            } else {
+                i.closest('.stars').querySelectorAll('input')
+                    .forEach(s => s.dataset.star >= star ? s.checked = false : s.checked = true);
+            }
+
+
+
+        })
+    })
