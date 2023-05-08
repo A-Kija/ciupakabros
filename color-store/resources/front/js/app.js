@@ -38,9 +38,6 @@ document.querySelectorAll('.stars input')
             const star = i.dataset.star;
             const isChecking = i.checked;
 
-            // i.closest('.stars').querySelectorAll('input')
-            //     .forEach(s => s.checked = false);
-
             if (isChecking) {
                 i.closest('.stars').querySelectorAll('input')
                     .forEach(s => s.dataset.star <= star ? s.checked = true : s.checked = false);
@@ -48,8 +45,8 @@ document.querySelectorAll('.stars input')
                 i.closest('.stars').querySelectorAll('input')
                     .forEach(s => s.dataset.star >= star ? s.checked = false : s.checked = true);
             }
-
-
-
-        })
+            i.closest('.stars').querySelectorAll('label')
+                .forEach(l => l.classList.remove('half'));
+            // i.closest('form').submit(); // old skool style
+        });
     })

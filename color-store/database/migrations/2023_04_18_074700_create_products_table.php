@@ -19,6 +19,8 @@ return new class extends Migration
             $table->decimal('price', 6, 2)->unsigned();
             $table->unsignedBigInteger('cat_id');
             $table->foreign('cat_id')->references('id')->on('cats');
+            $table->decimal('rate', 3, 2)->unsigned()->nullable()->default(null);
+            $table->json('rates')->default('[]');
         });
     }
 

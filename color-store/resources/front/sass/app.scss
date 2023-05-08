@@ -186,22 +186,57 @@
 }
 
 .stars {
-    padding: 40px 0 0 0;
+    padding: 20px 0 0 0;
+    display: flex;
+    align-items: center;
+    position: relative;
     [type=checkbox]+.star {
+        position: relative;
         font-size: 30px;
         color: crimson;
         cursor: pointer;
         user-select: none;
+        width: 25px;
         &:after {
+            position: absolute;
             content: '\2606'
         }
     }
     [type=checkbox]:checked+.star {
         &:after {
+            position: absolute;
             content: '\2605'
+        }
+    }
+    [type=checkbox]+.star.half {
+        width: 25px;
+        &:before {
+            content: '\2606';
+            position: absolute;
+        }
+        &:after {
+            content: '\2605';
+            position: absolute;
+            width: 12px;
+            overflow: hidden;
         }
     }
     [type=checkbox] {
         display: none;
+    }
+    .result {
+        font-size: 20px;
+        font-weight: bold;
+        padding: 0 16px;
+        position: relative;
+        top: 26px;
+        span {
+            font-size: 14px;
+            font-weight: normal;
+        }
+    }
+    .btn {
+        position: relative;
+        top: 26px;
     }
 }

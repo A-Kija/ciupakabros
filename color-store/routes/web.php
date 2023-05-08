@@ -26,6 +26,7 @@ Route::name('front-')->group(function () {
     Route::get('/product/{product}', [F::class, 'showProduct'])->name('show-product');
     Route::get('/my-orders', [F::class, 'orders'])->name('orders')->middleware('role:admin|client');
     Route::get('/download/{order}', [F::class, 'download'])->name('download')->middleware('role:admin|client');
+    Route::put('/vote/{product}', [F::class, 'vote'])->name('vote')->middleware('role:admin|client');
 });
 
 Route::prefix('cart')->name('cart-')->group(function () {
