@@ -15,6 +15,7 @@
                     <ul class="list-group">
                         @forelse($products as $product)
                         <div class="product-line">
+                            @include('front.tags')
                             <div class="product-colors">
                                 @foreach($product->color as $color)
                                 <div class="color" style="background-color:{{$color->hex}};">{{$color->title}}</div>

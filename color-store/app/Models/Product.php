@@ -18,4 +18,9 @@ class Product extends Model
     {
         return $this->hasMany(Color::class);
     }
+
+    public function productTag()
+    {
+        return $this->hasMany(productTag::class);
+    }
 }

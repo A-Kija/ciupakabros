@@ -240,3 +240,58 @@
         top: 26px;
     }
 }
+
+.tags {
+    display: flex;
+    padding: 0 0 20px 0;
+    .tag {
+        color: skyblue;
+        padding: 0 7px;
+        font-size: 20px;
+        &::before {
+            content: '#';
+            font-weight: bold;
+            font-size: 30px;
+        }
+    }
+    .add {
+        padding: 0 0 0 30px;
+        position: relative;
+        input {
+            outline: none;
+            border: none;
+            border-bottom: 1px dashed skyblue;
+            color: skyblue;
+            font-size: 20px;
+            height: 26px;
+        }
+        &::before {
+            content: '#';
+            font-weight: bold;
+            font-size: 30px;
+            color: skyblue;
+        }
+        .list {
+            display: none;
+            position: absolute;
+            padding: 20px;
+            border: 1px solid skyblue;
+            background-color: white;
+            left: 52px;
+            top: 50px;
+            width: 100%;
+            box-sizing: border-box;
+            .list-tag {
+                cursor: pointer;
+                transition: all 0.3s;
+                &:hover {
+                    background-color: skyblue;
+                    color: white;
+                }
+            }
+        }
+        input:focus+.list {
+            display: block;
+        }
+    }
+}

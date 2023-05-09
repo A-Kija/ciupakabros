@@ -49,4 +49,28 @@ document.querySelectorAll('.stars input')
                 .forEach(l => l.classList.remove('half'));
             // i.closest('form').submit(); // old skool style
         });
-    })
+    });
+
+
+if (document.querySelector('.--tags')) {
+    document.querySelectorAll('.--add--new')
+        .forEach(i => {
+            i.addEventListener('input', e => {
+                axios.get(e.target.dataset.url + '?t=' + e.target.value)
+                    .then(res => {
+                        i.closest('.--add').querySelector('.--tags--list').innerHTML = res.data.tags;
+                        initTagList();
+
+
+                    })
+            })
+        })
+}
+
+
+
+
+
+const initTagList = _ => {
+
+}
