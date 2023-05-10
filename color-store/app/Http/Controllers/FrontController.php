@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Cat;
 use App\Models\Tag;
 use App\Models\Order;
+use App\Models\ProductTag;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class FrontController extends Controller
@@ -61,9 +62,39 @@ class FrontController extends Controller
         ]);
     }
 
-    public function addTag(Request $request, Tag $tag)
+    public function addTag(Request $request, Product $product)
     {
+        $tagId = $request->tag ?? 0;
 
+        $tag = Tag::find($tagId);
+
+        if (!$tag) {
+            return response()->json([
+                'message' => 'Invalid tag id',
+                'status' => 'error'
+            ]);
+        }
+
+        $tagsId = $product->productTag->pluck('tag_id')->all();
+        
+        if (in_array($tagId, $tagsId)) {
+            return response()->json([
+                'message' => 'Tag exists',
+                'status' => 'error'
+            ]);
+        }
+
+        ProductTag::create([
+            'tag_id' => $tagId,
+            'product_id' => $product->id
+        ]);
+
+
+        return response()->json([
+            'message' => 'Tag added',
+            'status' => 'ok',
+            'tag' => $tag->title
+        ]);
     }
 
     public function catColors(Cat $cat)

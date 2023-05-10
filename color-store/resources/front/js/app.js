@@ -59,18 +59,53 @@ if (document.querySelector('.--tags')) {
                 axios.get(e.target.dataset.url + '?t=' + e.target.value)
                     .then(res => {
                         i.closest('.--add').querySelector('.--tags--list').innerHTML = res.data.tags;
-                        initTagList();
+                        initTagList(i.closest('.--add').querySelector('.--tags--list'));
 
 
-                    })
-            })
+                    });
+            });
+            i.addEventListener('focus', e => {
+                i.closest('.--add').querySelector('.--tags--list').style.display = 'block';
+            });
+            i.addEventListener('blur', e => {
+                setTimeout(() => {
+                    e.target.value = '';
+                    i.closest('.--add').querySelector('.--tags--list').innerHTML = '';
+                    i.closest('.--add').querySelector('.--tags--list').style.display = 'none';
+                }, 200);
+            });
+        });
+    document.querySelectorAll('.--tags')
+        .forEach(tags => {
+            tags.querySelectorAll('.--tag')
+                .forEach(tag => {
+                    console.log(tag);
+                    initRemoveTag(tag)
+                })
         })
+
 }
 
+const initRemoveTag = tag => {
+    // tag
+}
 
-
-
-
-const initTagList = _ => {
-
+const initTagList = tagList => {
+    tagList.querySelectorAll('.--list--tag')
+        .forEach(t => {
+            t.addEventListener('click', _ => {
+                axios.put(tagList.dataset.url, { tag: t.dataset.id })
+                    .then(res => {
+                        if (res.data.status == 'ok') {
+                            const add = tagList.closest('.--add');
+                            const bin = tagList.closest('.--tags');
+                            const div = document.createElement('div');
+                            div.classList.add('tag');
+                            const title = document.createTextNode(res.data.tag);
+                            div.appendChild(title);
+                            bin.insertBefore(div, add);
+                        }
+                    });
+            });
+        });
 }
