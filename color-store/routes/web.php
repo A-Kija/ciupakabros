@@ -29,7 +29,8 @@ Route::name('front-')->group(function () {
     Route::put('/vote/{product}', [F::class, 'vote'])->name('vote')->middleware('role:admin|client');
     Route::get('/tags-list', [F::class, 'getTagsList'])->name('tags-list')->middleware('role:admin|client');
     Route::put('/add-tag/{product}', [F::class, 'addTag'])->name('add-tag')->middleware('role:admin|client');
-    Route::post('/add-new-tag', [F::class, 'addNewTag'])->name('add-new-tag')->middleware('role:admin|client');
+    Route::put('/delete-tag/{product}', [F::class, 'deleteTag'])->name('delete-tag')->middleware('role:admin|client');
+    Route::post('/add-new-tag/{product}', [F::class, 'addNewTag'])->name('add-new-tag')->middleware('role:admin|client');
 });
 
 Route::prefix('cart')->name('cart-')->group(function () {

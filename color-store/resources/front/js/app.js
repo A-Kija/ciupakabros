@@ -13,7 +13,6 @@ document.querySelectorAll('.--add--to--cart').forEach(section => {
 
         axios.put(section.dataset.url, data)
             .then(res => {
-                console.log(res.data);
                 document.querySelector('.--count').innerText = res.data.count;
                 document.querySelector('.--total').innerText = res.data.total.toFixed(2);
             });
@@ -53,6 +52,56 @@ document.querySelectorAll('.stars input')
 
 
 if (document.querySelector('.--tags')) {
+
+
+
+    const initRemoveTag = tag => {
+        const tags = tag.closest('.--tags');
+        tag.addEventListener('click', _ => {
+            axios.put(tags.dataset.url, { tag: tag.dataset.id })
+                .then(res => {
+                    if (res.data.status == 'ok') {
+                        tag.remove();
+                    }
+                });
+        });
+    }
+
+    const initTagList = tagList => {
+        tagList.querySelectorAll('.--list--tag')
+            .forEach(t => {
+                t.addEventListener('click', _ => {
+                    axios.put(tagList.dataset.url, { tag: t.dataset.id })
+                        .then(res => {
+                            if (res.data.status == 'ok') {
+                                const add = tagList.closest('.--add');
+                                const bin = tagList.closest('.--tags');
+                                const div = document.createElement('div');
+                                div.classList.add('tag');
+                                div.dataset.id = res.data.id;
+                                const title = document.createTextNode(res.data.tag);
+                                div.appendChild(title);
+                                const i = document.createElement('i');
+                                div.appendChild(i);
+                                bin.insertBefore(div, add);
+                                initRemoveTag(div);
+                            }
+                        });
+                });
+            });
+    }
+
+    document.querySelectorAll('.--new')
+        .forEach(b => {
+            b.addEventListener('click', _ => {
+                const i = b.closest('.--add').querySelector('.--add--new');
+                axios.post(b.dataset.url, { tag: i.value })
+                    .then(res => {
+                        console.log(res.data);
+                    })
+            })
+        })
+
     document.querySelectorAll('.--add--new')
         .forEach(i => {
             i.addEventListener('input', e => {
@@ -79,33 +128,8 @@ if (document.querySelector('.--tags')) {
         .forEach(tags => {
             tags.querySelectorAll('.--tag')
                 .forEach(tag => {
-                    console.log(tag);
                     initRemoveTag(tag)
-                })
-        })
-
-}
-
-const initRemoveTag = tag => {
-    // tag
-}
-
-const initTagList = tagList => {
-    tagList.querySelectorAll('.--list--tag')
-        .forEach(t => {
-            t.addEventListener('click', _ => {
-                axios.put(tagList.dataset.url, { tag: t.dataset.id })
-                    .then(res => {
-                        if (res.data.status == 'ok') {
-                            const add = tagList.closest('.--add');
-                            const bin = tagList.closest('.--tags');
-                            const div = document.createElement('div');
-                            div.classList.add('tag');
-                            const title = document.createTextNode(res.data.tag);
-                            div.appendChild(title);
-                            bin.insertBefore(div, add);
-                        }
-                    });
-            });
+                });
         });
+
 }

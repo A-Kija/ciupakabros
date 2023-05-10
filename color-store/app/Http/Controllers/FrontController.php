@@ -62,6 +62,79 @@ class FrontController extends Controller
         ]);
     }
 
+    public function addNewTag(Request $request, Product $product)
+    {
+        $title = $request->tag ?? '';
+
+        if (strlen($title) < 3) {
+            return response()->json([
+                'message' => 'Invalid tag title',
+                'status' => 'error'
+            ]);
+        }
+
+        $tag = Tag::where('title', $title)->first();
+
+        if (!$tag) {
+
+            $tag = Tag::create([
+                'title' => $title
+            ]);
+        }
+
+
+        $tagsId = $product->productTag->pluck('tag_id')->all();
+        
+        if (in_array($tag->id, $tagsId)) {
+            return response()->json([
+                'message' => 'Tag exists',
+                'status' => 'error'
+            ]);
+        }
+
+        ProductTag::create([
+            'tag_id' => $tag->id,
+            'product_id' => $product->id
+        ]);
+
+
+        return response()->json([
+            'message' => 'Tag added',
+            'status' => 'ok',
+            'tag' => $tag->title,
+            'id' => $tag->id,
+        ]);
+
+
+    }
+
+    public function deleteTag(Request $request, Product $product)
+    {
+        $tagId = $request->tag ?? 0;
+
+        $tag = Tag::find($tagId);
+
+        if (!$tag) {
+            return response()->json([
+                'message' => 'Invalid tag id',
+                'status' => 'error'
+            ]);
+        }
+
+        $productTag = ProductTag::where('product_id', $product->id)
+        ->where('tag_id', $tag->id)->first();
+
+        $productTag->delete();
+        return response()->json([
+            'message' => 'Tag removed',
+            'status' => 'ok',
+            'tag' => $tag->title,
+            'id' => $tag->id,
+        ]);
+
+
+    }
+
     public function addTag(Request $request, Product $product)
     {
         $tagId = $request->tag ?? 0;
@@ -93,7 +166,8 @@ class FrontController extends Controller
         return response()->json([
             'message' => 'Tag added',
             'status' => 'ok',
-            'tag' => $tag->title
+            'tag' => $tag->title,
+            'id' => $tag->id,
         ]);
     }
 
