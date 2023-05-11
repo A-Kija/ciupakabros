@@ -21,6 +21,9 @@ use App\Http\Controllers\TagController as T;
 Route::prefix('tags')->name('tags-')->group(function () {
     Route::get('/', [T::class, 'index'])->name('index')->middleware('role:admin');
     Route::get('/list', [T::class, 'list'])->name('list')->middleware('role:admin');
+
+    Route::post('/create', [T::class, 'create'])->name('create')->middleware('role:admin');
+    Route::delete('/delete/{tag}', [T::class, 'destroy'])->name('delete')->middleware('role:admin');
 });
 
 Route::name('front-')->group(function () {

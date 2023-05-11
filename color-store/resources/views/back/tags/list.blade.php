@@ -6,11 +6,9 @@
         </div>
         <div class="buttons">
             <a href="{{route('cats-edit', $tag)}}" class="btn btn-outline-success">Edit</a>
-            <form action="{{route('cats-delete', $tag)}}" method="post">
-                <button type="submit" class="btn btn-outline-danger">delete</button>
-                @csrf
-                @method('delete')
-            </form>
+
+            <button type="button" class="btn btn-outline-danger --delete" data-url="{{route('tags-delete', $tag)}}">delete</button>
+
         </div>
     </div>
 </li>

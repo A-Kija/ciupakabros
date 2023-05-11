@@ -71,8 +71,40 @@ if (document.querySelector('.--add--gallery')) {
 if (document.querySelector('.--tags--list')) {
     const listDom = document.querySelector('.--tags--list');
     const listUrl = listDom.dataset.url;
+    const loader = document.querySelector('.loader');
+    const createButton = document.querySelector('.--create');
+    const createTitle = document.querySelector('[name=create-title]');
 
-    axios.get(listUrl).then(res => listDom.innerHTML = res.data.html);
+    const showLoader = _ => loader.style.display = 'flex';
+    const hideLoader = _ => loader.style.display = 'none';
 
+    const getList = _ => axios.get(listUrl).then(res => showList(res));
+
+    const showList = res => {
+        listDom.innerHTML = res.data.html;
+        hideLoader();
+        listDom.querySelectorAll('.--delete')
+            .forEach(b => {
+                b.addEventListener('click', _ => {
+                    showLoader();
+                    axios.delete(b.dataset.url).then(res => getList(res));
+                });
+            });
+    }
+
+    getList();
+    createButton.addEventListener('click', _ => {
+        showLoader();
+        axios.post(createButton.dataset.url, { title: createTitle.value })
+            .then(res => {
+                if (res.data.status == 'ok') {
+                    getList(res);
+                    createTitle.value = '';
+                } else {
+                    hideLoader();
+                    console.log('error', res.data.message)
+                }
+            })
+    })
 
 }
