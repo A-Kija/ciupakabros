@@ -6,7 +6,7 @@ use App\Http\Controllers\ProductController as P;
 use App\Http\Controllers\FrontController as F;
 use App\Http\Controllers\CartController as CART;
 use App\Http\Controllers\OrderController as O;
-
+use App\Http\Controllers\TagController as T;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -18,7 +18,10 @@ use App\Http\Controllers\OrderController as O;
 |
 */
 
-
+Route::prefix('tags')->name('tags-')->group(function () {
+    Route::get('/', [T::class, 'index'])->name('index')->middleware('role:admin');
+    Route::get('/list', [T::class, 'list'])->name('list')->middleware('role:admin');
+});
 
 Route::name('front-')->group(function () {
     Route::get('/', [F::class, 'index'])->name('index');

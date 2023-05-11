@@ -6,16 +6,26 @@ use App\Models\Tag;
 use App\Http\Requests\StoreTagRequest;
 use App\Http\Requests\UpdateTagRequest;
 
+use Illuminate\Http\Request;
+
 class TagController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
     public function index()
     {
-        //
+        return view('back.tags.index');
+    }
+
+    public function list()
+    {
+        $tags = Tag::all();
+
+        $html = view('back.tags.list')->with(['tags' => $tags])->render();
+
+        return response()->json([
+            'html' => $html,
+            'status' => 'ok',
+        ]);
     }
 
     /**

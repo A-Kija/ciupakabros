@@ -3,7 +3,6 @@ import axios from 'axios';
 window.axios = axios;
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
-
 document.querySelectorAll('.--add--to--cart').forEach(section => {
     section.querySelector('button').addEventListener('click', _ => {
         const data = {};
@@ -50,10 +49,7 @@ document.querySelectorAll('.stars input')
         });
     });
 
-
 if (document.querySelector('.--tags')) {
-
-
 
     const initRemoveTag = tag => {
         const tags = tag.closest('.--tags');
@@ -67,6 +63,20 @@ if (document.querySelector('.--tags')) {
         });
     }
 
+    const insertTag = (tagList, res) => {
+        const add = tagList.closest('.--add');
+        const bin = tagList.closest('.--tags');
+        const div = document.createElement('div');
+        div.classList.add('tag');
+        div.dataset.id = res.data.id;
+        const title = document.createTextNode(res.data.tag);
+        div.appendChild(title);
+        const i = document.createElement('i');
+        div.appendChild(i);
+        bin.insertBefore(div, add);
+        initRemoveTag(div);
+    }
+
     const initTagList = tagList => {
         tagList.querySelectorAll('.--list--tag')
             .forEach(t => {
@@ -74,17 +84,7 @@ if (document.querySelector('.--tags')) {
                     axios.put(tagList.dataset.url, { tag: t.dataset.id })
                         .then(res => {
                             if (res.data.status == 'ok') {
-                                const add = tagList.closest('.--add');
-                                const bin = tagList.closest('.--tags');
-                                const div = document.createElement('div');
-                                div.classList.add('tag');
-                                div.dataset.id = res.data.id;
-                                const title = document.createTextNode(res.data.tag);
-                                div.appendChild(title);
-                                const i = document.createElement('i');
-                                div.appendChild(i);
-                                bin.insertBefore(div, add);
-                                initRemoveTag(div);
+                                insertTag(tagList, res);
                             }
                         });
                 });
@@ -97,10 +97,11 @@ if (document.querySelector('.--tags')) {
                 const i = b.closest('.--add').querySelector('.--add--new');
                 axios.post(b.dataset.url, { tag: i.value })
                     .then(res => {
+                        insertTag(b.closest('.--add').querySelector('.--tags--list'), res);
                         console.log(res.data);
                     })
-            })
-        })
+            });
+        });
 
     document.querySelectorAll('.--add--new')
         .forEach(i => {
@@ -109,8 +110,6 @@ if (document.querySelector('.--tags')) {
                     .then(res => {
                         i.closest('.--add').querySelector('.--tags--list').innerHTML = res.data.tags;
                         initTagList(i.closest('.--add').querySelector('.--tags--list'));
-
-
                     });
             });
             i.addEventListener('focus', e => {
@@ -124,6 +123,7 @@ if (document.querySelector('.--tags')) {
                 }, 200);
             });
         });
+
     document.querySelectorAll('.--tags')
         .forEach(tags => {
             tags.querySelectorAll('.--tag')
@@ -131,5 +131,4 @@ if (document.querySelector('.--tags')) {
                     initRemoveTag(tag)
                 });
         });
-
 }

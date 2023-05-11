@@ -67,3 +67,12 @@ if (document.querySelector('.--add--gallery')) {
             document.querySelector('.gallery-inputs').append(input);
         });
 }
+
+if (document.querySelector('.--tags--list')) {
+    const listDom = document.querySelector('.--tags--list');
+    const listUrl = listDom.dataset.url;
+
+    axios.get(listUrl).then(res => listDom.innerHTML = res.data.html);
+
+
+}
