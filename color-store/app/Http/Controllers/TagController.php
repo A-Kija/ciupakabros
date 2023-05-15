@@ -55,45 +55,42 @@ class TagController extends Controller
         ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Tag $tag)
+
+    public function showModal(Tag $tag)
     {
-        //
+        $html = view('back.tags.modal')->with(['tag' => $tag])->render();
+        return response()->json([
+            'html' => $html,
+            'status' => 'ok',
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Tag $tag)
-    {
-        //
-    }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdateTagRequest  $request
-     * @param  \App\Models\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdateTagRequest $request, Tag $tag)
+    public function update(Request $request, Tag $tag)
     {
-        //
-    }
+        $title = $request->title ?? '';
+        $OldTag = Tag::where('title', $title)->first();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Tag  $tag
-     * @return \Illuminate\Http\Response
-     */
+        if ($OldTag && $OldTag->id == $tag->id) {
+            return response()->json([
+                'status' => 'info',
+                'message' => 'Tag was not updated'
+            ]);
+        }
+
+        if (!$OldTag && $title) {
+            $tag->update([
+                'title' => $title
+            ]);
+            return response()->json([
+                'status' => 'ok',
+                'message' => 'Now tag is #'.$title
+            ]);
+        }
+        return response()->json([
+            'status' => 'error',
+            'message' => 'Tag already exists or empty.'
+        ]);
+    }
 
 }

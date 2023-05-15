@@ -224,3 +224,21 @@ span.rem {
         }
     }
 }
+
+.modal {
+    display: block;
+    background-color: #5f9ea031;
+}
+
+.messages-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    position: fixed;
+    top: 50px;
+    right: 50px;
+    z-index: 100;
+    .alert {
+        display: none;
+    }
+}

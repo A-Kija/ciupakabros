@@ -70,6 +70,11 @@ if (document.querySelector('.--add--gallery')) {
 
 if (document.querySelector('.--tags--list')) {
     const listDom = document.querySelector('.--tags--list');
+    const modalDom = document.querySelector('.--modal--bin');
+    const messagesDom = document.querySelector('.--messages--bin');
+    const msgOk = messagesDom.querySelector('.--ok');
+    const msgInfo = messagesDom.querySelector('.--info');
+    const msgError = messagesDom.querySelector('.--error');
     const listUrl = listDom.dataset.url;
     const loader = document.querySelector('.loader');
     const createButton = document.querySelector('.--create');
@@ -78,17 +83,101 @@ if (document.querySelector('.--tags--list')) {
     const showLoader = _ => loader.style.display = 'flex';
     const hideLoader = _ => loader.style.display = 'none';
 
+    const showMessage = ($text, $type) => {
+        switch ($type) {
+            case 'ok':
+                msgOk.style.display = 'block';
+                msgOk.innerText = $text;
+                setTimeout(() => {
+                    msgOk.style.display = null;
+                    msgOk.innerText = '';
+                }, 5000);
+                break;
+            case 'info':
+                msgInfo.style.display = 'block';
+                msgInfo.innerText = $text;
+                setTimeout(() => {
+                    msgInfo.style.display = null;
+                    msgInfo.innerText = '';
+                }, 5000);
+                break;
+            case 'error':
+                msgError.style.display = 'block';
+                msgError.innerText = $text;
+                setTimeout(() => {
+                    msgError.style.display = null;
+                    msgError.innerText = '';
+                }, 5000);
+        }
+    }
+
     const getList = _ => axios.get(listUrl).then(res => showList(res));
 
     const showList = res => {
         listDom.innerHTML = res.data.html;
         hideLoader();
+        listDom.querySelectorAll('.--edit')
+            .forEach(b => {
+                b.addEventListener('click', _ => {
+                    showLoader();
+                    axios.get(b.dataset.url)
+                        .then(res => {
+                            hideLoader();
+                            modalDom.innerHTML = res.data.html;
+                            // close
+                            modalDom.querySelectorAll('.--close')
+                                .forEach(b => {
+                                    b.addEventListener('click', _ => {
+                                        modalDom.innerHTML = '';
+                                    });
+                                });
+                            // edit
+                            modalDom.querySelector('.--edit')
+                                .addEventListener('click', e => {
+                                    const title = modalDom.querySelector('[name=edit-title]').value;
+
+                                    showLoader();
+                                    axios.put(e.target.dataset.url, { title })
+                                        .then(res => {
+                                            if (res.data.status == 'ok') {
+                                                modalDom.innerHTML = '';
+                                                getList();
+                                                showMessage(res.data.message, 'ok');
+                                            }
+                                            if (res.data.status == 'error') {
+                                                hideLoader();
+                                                showMessage(res.data.message, 'error');
+                                            }
+                                            if (res.data.status == 'info') {
+                                                showMessage(res.data.message, 'info');
+                                                hideLoader();
+                                                modalDom.innerHTML = '';
+                                            }
+
+                                        });
+                                });
+                        })
+                        .catch(_ => {
+                            hideLoader();
+                            showMessage('Ooops... Server Error', 'error');
+                        });
+                });
+            });
+
         listDom.querySelectorAll('.--delete')
             .forEach(b => {
                 b.addEventListener('click', _ => {
                     showLoader();
-                    axios.delete(b.dataset.url).then(res => getList(res));
-                });
+                    axios.delete(b.dataset.url).then(res => {
+                            getList();
+                            showMessage('Tag was deleted', 'ok');
+                        })
+                        .catch(_ => {
+                            hideLoader();
+                            showMessage('Ooops... Server Error', 'error');
+                        });
+                })
+
             });
     }
 
@@ -98,7 +187,7 @@ if (document.querySelector('.--tags--list')) {
         axios.post(createButton.dataset.url, { title: createTitle.value })
             .then(res => {
                 if (res.data.status == 'ok') {
-                    getList(res);
+                    getList();
                     createTitle.value = '';
                 } else {
                     hideLoader();

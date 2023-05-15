@@ -43,4 +43,8 @@
         <div></div>
     </div>
 </div>
+<div class="--modal--bin"></div>
+<div class="--messages--bin messages-container">
+@include('layouts.js-messages')
+</div>
 @endsection

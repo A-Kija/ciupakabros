@@ -5,10 +5,8 @@
             <h2>{{$tag->title}}</h2>
         </div>
         <div class="buttons">
-            <a href="{{route('cats-edit', $tag)}}" class="btn btn-outline-success">Edit</a>
-
+            <button type="button" class="btn btn-outline-success --edit" data-url="{{route('tags-show-modal', $tag)}}">edit</button>
             <button type="button" class="btn btn-outline-danger --delete" data-url="{{route('tags-delete', $tag)}}">delete</button>
-
         </div>
     </div>
 </li>

@@ -23,6 +23,10 @@ Route::prefix('tags')->name('tags-')->group(function () {
     Route::get('/list', [T::class, 'list'])->name('list')->middleware('role:admin');
 
     Route::post('/create', [T::class, 'create'])->name('create')->middleware('role:admin');
+
+    Route::get('/show-modal/{tag}', [T::class, 'showModal'])->name('show-modal')->middleware('role:admin');
+    Route::put('/update/{tag}', [T::class, 'update'])->name('update')->middleware('role:admin');
+
     Route::delete('/delete/{tag}', [T::class, 'destroy'])->name('delete')->middleware('role:admin');
 });
 
