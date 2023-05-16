@@ -5,6 +5,9 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
+use App\Http\Controllers\NiceController as N;
+use App\Http\Controllers\PaletteController as P;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +19,19 @@ use Inertia\Inertia;
 |
 */
 
+
+
+Route::get('/nice', [N::class, 'index'])->name('nice-index');
+
+Route::prefix('palette')->name('palette-')->group(function () {
+    Route::get('/', [P::class, 'index'])->name('index');
+    Route::post('/', [P::class, 'store'])->name('store');
+    Route::put('/{palette}', [P::class, 'update'])->name('update');
+    Route::delete('/{palette}', [P::class, 'delete'])->name('delete');
+
+});
+
+
 Route::get('/', function () {
     return Inertia::render('Welcome', [
         'canLogin' => Route::has('login'),
@@ -24,6 +40,7 @@ Route::get('/', function () {
         'phpVersion' => PHP_VERSION,
     ]);
 });
+
 
 Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');

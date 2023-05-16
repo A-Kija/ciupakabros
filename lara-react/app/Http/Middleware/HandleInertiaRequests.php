@@ -39,6 +39,11 @@ class HandleInertiaRequests extends Middleware
                     'location' => $request->url(),
                 ]);
             },
+            'animals' => [
+                'beaver',
+                'racoon',
+                'fox'
+            ]
         ]);
     }
 }
