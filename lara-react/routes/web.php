@@ -25,9 +25,11 @@ Route::get('/nice', [N::class, 'index'])->name('nice-index');
 
 Route::prefix('palette')->name('palette-')->group(function () {
     Route::get('/', [P::class, 'index'])->name('index');
+
+    Route::get('/list', [P::class, 'list'])->name('list');
     Route::post('/', [P::class, 'store'])->name('store');
     Route::put('/{palette}', [P::class, 'update'])->name('update');
-    Route::delete('/{palette}', [P::class, 'delete'])->name('delete');
+    Route::delete('/{palette}', [P::class, 'destroy'])->name('delete');
 
 });
 

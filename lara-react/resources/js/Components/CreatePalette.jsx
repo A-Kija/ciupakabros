@@ -1,15 +1,17 @@
 import axios from "axios";
 import { useState } from "react"
 
-export default function CreatePalette({storeUrl}) {
+export default function CreatePalette({storeUrl, setLastUpdate, setLoader}) {
 
     const [title, setTitle] = useState('');
 
     const create = _ => {
+        setLoader(true);
         axios.post(storeUrl, {title})
-        .then(res => {
-            console.log(res);
+        .then(_ => {
+            setLastUpdate(Date.now());
             setTitle('');
+            setLoader(false);
         })
     }
 

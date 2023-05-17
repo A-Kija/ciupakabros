@@ -13,8 +13,8 @@ class PaletteController extends Controller
     {
         return Inertia::render('Palette', 
         [
-            'storeUrl' => route('palette-store')
-            
+            'storeUrl' => route('palette-store'),
+            'listUrl' => route('palette-list'),
         ]);
     }
 
@@ -24,50 +24,42 @@ class PaletteController extends Controller
         Palette::create( [
             'title' => $request->title
         ]);
+        return response()->json([
+            'status' => 'ok',
+            'msg' => 'Created'
+        ], 201);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Palette  $palette
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Palette $palette)
+    public function list()
     {
-        //
+        $palettes = Palette::all()
+        ->map(function($p) {
+            $p->deleteUrl = route('palette-delete', $p);
+            $p->updateUrl = route('palette-update', $p);
+            return $p;
+        });
+        return response()->json($palettes);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Palette  $palette
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Palette $palette)
+
+    public function update(Request $request, Palette $palette)
     {
-        //
+        $palette->update([
+            'title' => $request->title
+        ]);
+        return response()->json([
+            'status' => 'ok',
+            'msg' => 'Updated'
+        ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePaletteRequest  $request
-     * @param  \App\Models\Palette  $palette
-     * @return \Illuminate\Http\Response
-     */
-    public function update(UpdatePaletteRequest $request, Palette $palette)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Palette  $palette
-     * @return \Illuminate\Http\Response
-     */
     public function destroy(Palette $palette)
     {
-        //
+        $palette->delete();
+        return response()->json([
+            'status' => 'ok',
+            'msg' => 'Deleted'
+        ]);
     }
 }
